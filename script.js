@@ -94,7 +94,8 @@ function openModal(type) {
         finances: "https://financesrubertt.vercel.app/",
         whales: "https://whalesgames.vercel.app/",
         linkedin: "https://br.linkedin.com/in/rubertt-ramires-da-silva",
-        github: "https://github.com/Rubertt12"
+        github: "https://github.com/Rubertt12",
+        inventario:"https://sistema-de-inventario-pearl.vercel.app/"
     };
 
     if (!urls[key]) return;
