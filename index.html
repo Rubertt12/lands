@@ -45,12 +45,12 @@
             <div class="exp-box">
                 <span class="date">2024 – Presente</span>
                 <h3>Voke (Midea Carrier)</h3>
-                <p><p>Responsável pelo <strong>Rollout</strong> de ativos e manutenção em modelo <strong>HaaS</strong> na Midea Carrier. Atuação em diagnóstico de hardware, gestão de inventário e suporte crítico presencial.</p></p>
+                <p>Responsável pelo <strong>Rollout</strong> de ativos e manutenção em modelo <strong>HaaS</strong> na Midea Carrier. Atuação em diagnóstico de hardware, gestão de inventário e suporte crítico presencial.</p>
             </div>
             <div class="exp-box" style="border:none; margin:0;">
                 <span class="date">2019 – 2023</span>
                 <h3>Ideia Business</h3>
-                <p>Como Assistente de TI III na Ideia Business, atuei no suporte avançado às plataformas de benefícios e assinatura digital (Ideia Signer). Fui responsável por realizar testes de vulnerabilidade (QA), identificar bugs e atuar como ponte técnica entre as necessidades dos clientes e a equipe de desenvolvimento</p>
+                <p>Como Assistente de TI III na Ideia Business, atuei no suporte avançado às plataformas de benefícios e assinatura digital (Ideia Signer). Fui responsável por realizar testes de vulnerabilidade (QA), identificar bugs e atuar como ponte técnica entre as necessidades dos clientes e a equipe de desenvolvimento.</p>
             </div>
         </div>
 
@@ -78,8 +78,60 @@
         </div>
     </div>
 
+    <div id="launchpad" class="lp-overlay" onclick="closeLaunchpadOutside(event)">
+    <div class="lp-window" id="lpWindow">
+        <div class="lp-header">
+            <div class="lp-header-left">
+                <i class="fa-solid fa-rocket"></i>
+                <span>Aplicações</span>
+            </div>
+            <button class="lp-fullscreen-btn" onclick="toggleLPFullscreen(event)" title="Alternar Fullscreen">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+        
+        <div class="lp-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Procurar" id="lpSearchInput">
+        </div>
+
+        <div class="lp-grid">
+            <div class="lp-item" onclick="openModal('ativae')">
+                <img src="img/favicon.svg" alt="Ativae">
+                <span>Ativae</span>
+            </div>
+            <div class="lp-item" onclick="openModal('store')">
+                <img src="img/favicon-control.png" alt="Store">
+                <span>Store</span>
+            </div>
+            <div class="lp-item" onclick="openModal('finances')">
+                <img src="img/gestao.ico" alt="Finanças">
+                <span>Finanças</span>
+            </div>
+            <div class="lp-item" onclick="openModal('empty')">
+                <img src="img/novo-usuario.png" alt="Empty">
+                <span>What's Empty</span>
+            </div>
+           
+    <div class="lp-item add-btn" onclick="addNewApp()">
+        <div class="add-icon-wrapper">
+            <i class="fa-solid fa-plus"></i>
+        </div>
+        <span>Adicionar</span>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+
     <div class="dock-container">
         <nav class="dock">
+            <a href="javascript:void(0)" onclick="toggleLaunchpad(event)" class="dock-item lp-btn" data-label="Launchpad">
+                <img src="img/launchpad.webp" style="width: 85%; height: 85%;">
+            </a>
+            
+            <div class="dock-separator"></div>
+
             <a href="javascript:void(0)" onclick="openModal('linkedin')" class="dock-item li" data-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
             <a href="javascript:void(0)" onclick="openModal('github')" class="dock-item gh" data-label="GitHub"><i class="fa-brands fa-github"></i></a>
             
