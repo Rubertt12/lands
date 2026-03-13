@@ -175,15 +175,36 @@ iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
 /* BUSCA ESTILO SPOTLIGHT REFINADA */
 .lp-search {
-    background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 10px 25px 20px 25px; display: flex; align-items: center; gap: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre o ícone e o texto */
+    padding: 10px 0;
 }
-.lp-search i { font-size: 26px; color: rgba(255, 255, 255, 0.7); font-weight: 300; }
+
+.lp-search i { 
+    font-size: 26px; 
+    color: rgba(255, 255, 255, 0.7); 
+    /* IMPORTANTE: Ícones 'solid' precisam de weight 900 para renderizar */
+    font-weight: 900; 
+    width: 30px; /* Largura fixa para evitar saltos de layout */
+    text-align: center;
+}
+
 .lp-search input { 
-    background: transparent; border: none; color: white; outline: none; 
-    width: 100%; font-size: 24px; font-weight: 300; letter-spacing: -0.5px;
+    background: transparent; 
+    border: none; 
+    color: white; 
+    outline: none; 
+    width: 100%; 
+    font-size: 24px; 
+    font-weight: 300; 
+    letter-spacing: -0.5px;
 }
-.lp-search input::placeholder { color: rgba(255,255,255,0.2); }
+
+/* Estilo do Placeholder para manter a consistência */
+.lp-search input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
 
 .lp-grid {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
