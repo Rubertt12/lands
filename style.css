@@ -376,3 +376,75 @@ iframe { width: 100%; height: 100%; border: none; background: #fff; }
     transform: scale(0.9);
     transition: 0.1s;
 }
+
+
+
+/* Garante que o item sendo arrastado não dispare o hover de escala */
+.dock-item.dragging {
+    opacity: 0.4 !important;
+    transform: scale(0.8) !important;
+    pointer-events: none; /* Isso ajuda o 'dragover' a detectar o item de baixo */
+}
+
+/* Melhora a detecção do alvo */
+.dock-item.drag-over {
+    border: 2px solid var(--sotaque) !important;
+    transform: scale(1.1) translateX(10px) !important;
+    transition: transform 0.2s ease;
+}
+
+/* --- FIX FINAL: MODO CLARO SEM QUEBRA DE ESTRUTURA --- */
+
+/* 1. Variável de cor dinâmica para textos simples */
+body.light-mode {
+    --bg-light: #f5f5f7;
+    --texto-dark: #1d1d1f;
+}
+
+/* 2. Fundo e Texto Base */
+body.light-mode { background-color: var(--bg-light) !important; color: var(--texto-dark) !important; }
+body.light-mode #bg-canvas { background: var(--bg-light) !important; animation: none !important; }
+
+/* 3. PRESERVAÇÃO DO SEU NOME (TITULO-SILVER) */
+body.light-mode .titulo-silver {
+    background: linear-gradient(180deg, #1d1d1f 0%, #434344 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: none !important;
+}
+
+/* 4. PRESERVAÇÃO DO FULLSCREEN E ESTRUTURAS DO LAUNCHPAD */
+body.light-mode .lp-window { 
+    background: rgba(255, 255, 255, 0.6) !important; 
+    border-color: rgba(0, 0, 0, 0.1) !important; 
+}
+
+/* Garante que o header do Launchpad mantenha o alinhamento original */
+body.light-mode .lp-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    color: var(--texto-dark) !important;
+}
+
+/* 5. CORES DOS TEXTOS INTERNOS (Para não sumirem no branco) */
+body.light-mode h2, 
+body.light-mode h3, 
+body.light-mode p, 
+body.light-mode span, 
+body.light-mode i:not(.dock-item i) { 
+    color: var(--texto-dark) !important; 
+}
+
+body.light-mode .barra-sup {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border-bottom-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .dock {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Mantém os ícones da dock brancos (como são coloridos, precisam de contraste) */
+body.light-mode .dock-item i { color: #ffffff !important; }

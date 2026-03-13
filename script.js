@@ -9,7 +9,7 @@ function updateClock() {
 setInterval(updateClock, 1000); 
 updateClock();
 
-// 2. ANIMAÇÃO DO AVATAR
+// 2. ANIMAÇÃO DO AVATAR (SCROLL)
 const avatar = document.getElementById('avatar');
 const header = document.getElementById('header');
 const target = document.getElementById('avatar-target');
@@ -97,11 +97,9 @@ function openModal(type) {
         github: "https://github.com/Rubertt12"
     };
 
-   if (!urls[key]) return;
+    if (!urls[key]) return;
 
-    // Fecha o launchpad se estiver aberto
-    const lp = document.getElementById('launchpad');
-    if (lp && lp.classList.contains('active')) toggleLaunchpad();
+    if (document.getElementById('launchpad')?.classList.contains('active')) toggleLaunchpad();
 
     if (key === 'linkedin' || key === 'github') {
         window.open(urls[key], '_blank'); 
@@ -122,20 +120,6 @@ function closeModal() {
     if(content) content.innerHTML = '';
 }
 
-// Eventos de fechamento
-window.addEventListener('click', (event) => {
-    const lp = document.getElementById('launchpad');
-    if (event.target === lp) toggleLaunchpad();
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        const lp = document.getElementById('launchpad');
-        if (lp?.classList.contains('active')) toggleLaunchpad();
-        closeModal();
-    }
-});
-
 // 5. ADICIONAR NOVO APP
 function addNewApp() {
     const password = prompt("Senha:");
@@ -150,75 +134,120 @@ function addNewApp() {
         }
 
         if (name && url) {
-            const grid = document.querySelector('.lp-grid') || document.getElementById('lpGrid');
+            const grid = document.querySelector('.lp-grid');
             if (!grid) return;
 
             const newItem = document.createElement('div');
             newItem.className = 'lp-item';
             newItem.onclick = () => window.open(url, '_blank');
-
-            const randomFallback = defaultIcons[Math.floor(Math.random() * defaultIcons.length)];
-            newItem.innerHTML = `
-                <img src="${icon}" alt="${name}" onerror="this.src='${randomFallback}'">
-                <span>${name}</span>
-            `;
+            newItem.innerHTML = `<img src="${icon}" alt="${name}"><span>${name}</span>`;
 
             const addBtn = document.querySelector('.add-btn');
-            if (addBtn) grid.insertBefore(newItem, addBtn);
-            else grid.appendChild(newItem);
+            grid.insertBefore(newItem, addBtn);
         }
     } else if (password !== null) {
         alert("Senha incorreta.");
     }
 }
 
+// 6. EVENTOS GERAIS E DRAG & DROP
+document.addEventListener('DOMContentLoaded', () => {
+    // Fechar modais ao clicar fora
+    window.addEventListener('click', (event) => {
+        const lp = document.getElementById('launchpad');
+        if (event.target === lp) toggleLaunchpad();
+    });
 
-
-// Feedback visual de clique (escala o ícone brevemente)
-    const activeItem = document.querySelector(`.lp-item[onclick*="${type}"]`);
-    if (activeItem) {
-        activeItem.style.transform = "scale(0.9)";
-        setTimeout(() => activeItem.style.transform = "", 150);
-    }
-
-    if (key === 'linkedin' || key === 'github') {
-        window.open(urls[key], '_blank');
-        if (document.getElementById('launchpad').classList.contains('active')) toggleLaunchpad();
-    } else {
-        const modal = document.getElementById('modal');
-        const content = document.getElementById('modalContent');
-        
-        if (modal && content) {
-            // Mostra um loader enquanto o iframe carrega (Opcional, melhora a experiência)
-            content.innerHTML = `<div class="loader-modal" style="color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%)">Carregando...</div>
-                                 <iframe src="${urls[key]}" style="width:100%; height:100%; border:none; opacity:0; transition: opacity 0.5s;" onload="this.style.opacity='1'"></iframe>`;
-            
-            modal.classList.add('active');
-            if (document.getElementById('launchpad').classList.contains('active')) toggleLaunchpad();
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            const lp = document.getElementById('launchpad');
+            if (lp?.classList.contains('active')) toggleLaunchpad();
+            closeModal();
         }
-    }
-
-
-
+    });
 
     // Rastreamento de mouse para efeito de luz nos cards
-document.querySelectorAll('.card').forEach(card => {
-    card.onmousemove = e => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+    document.querySelectorAll('.card').forEach(card => {
+        card.onmousemove = e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+            card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        };
+    });
 
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-    };
+    // --- LÓGICA DE DRAG & DROP DA DOCK ---
+    const dock = document.querySelector('.dock');
+    let draggedItem = null;
+
+    const dockItems = document.querySelectorAll('.dock-item[draggable="true"]');
+
+    dockItems.forEach(item => {
+        item.addEventListener('dragstart', function(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', ''); 
+        });
+
+        item.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.dock-item').forEach(i => i.classList.remove('drag-over'));
+            draggedItem = null;
+        });
+
+        item.addEventListener('dragover', function(e) {
+            e.preventDefault(); 
+            if (this !== draggedItem) this.classList.add('drag-over');
+        });
+
+        item.addEventListener('dragleave', function() {
+            this.classList.remove('drag-over');
+        });
+
+        item.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            if (draggedItem && draggedItem !== this) {
+                const allItems = Array.from(dock.children);
+                const draggedIdx = allItems.indexOf(draggedItem);
+                const targetIdx = allItems.indexOf(this);
+
+                if (draggedIdx < targetIdx) {
+                    this.after(draggedItem);
+                } else {
+                    this.before(draggedItem);
+                }
+            }
+        });
+    });
 });
 
-// Melhoria: Fechar modal ao clicar na tecla 'ESC'
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        closeModal();
-        if (document.getElementById('launchpad').classList.contains('active')) {
-            toggleLaunchpad();
-        }
+
+
+// --- LÓGICA DO BOTÃO DARK/LIGHT MODE ---
+const themeToggle = document.getElementById('theme-toggle');
+
+// Verifica se já existe uma preferência salva
+if (localStorage.getItem('theme') === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.classList.replace('fa-sun', 'fa-moon');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    
+    // Salva a preferência
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    
+    // Troca o ícone (Sol para modo escuro, Lua para modo claro)
+    if (isLight) {
+        themeToggle.classList.replace('fa-sun', 'fa-moon');
+    } else {
+        themeToggle.classList.replace('fa-moon', 'fa-sun');
     }
 });
+
+
+

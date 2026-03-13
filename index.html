@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Rúbertt Silva | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,7 +15,10 @@
             <i class="fa-solid fa-shield-halved" style="color: var(--sotaque)"></i>
             <span style="opacity: 0.9">RÚBERTT SILVA | SECURITY & SUPPORT</span>
         </div>
-        <div style="margin-left:auto; opacity: 0.8"><span id="clock">00:00</span></div>
+        <div style="margin-left:auto; display:flex; align-items:center; gap:15px">
+        <i class="fa-solid fa-sun" id="theme-toggle" style="cursor:pointer; font-size: 14px; opacity: 0.8;"></i>
+        <span id="clock">00:00</span>
+    </div>
     </div>
 
     <div id="bg-canvas"></div>
@@ -69,7 +71,7 @@
         </div>
     </div>
 
-    <div class="modal" id="modal" onclick="if(event.target.id==='modal')closeModal()">
+    <div class="modal" id="modal">
         <div class="modal-win">
             <div class="modal-bar">
                 <div class="dot close" onclick="closeModal()"></div>
@@ -80,56 +82,54 @@
         </div>
     </div>
 
-    <div id="launchpad" class="lp-overlay" onclick="closeLaunchpadOutside(event)">
-    <div class="lp-window" id="lpWindow">
-        <div class="lp-header">
-            <div class="lp-header-left">
-                <i class="fa-solid fa-rocket"></i>
-                <span>Aplicações</span>
+    <div id="launchpad" class="lp-overlay">
+        <div class="lp-window" id="lpWindow">
+            <div class="lp-header">
+                <div class="lp-header-left">
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>Aplicações</span>
+                </div>
+                <button class="lp-fullscreen-btn" onclick="toggleLPFullscreen(event)" title="Alternar Fullscreen">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
             </div>
-            <button class="lp-fullscreen-btn" onclick="toggleLPFullscreen(event)" title="Alternar Fullscreen">
-                <i class="fa-solid fa-expand"></i>
-            </button>
-        </div>
-        
-        <div class="lp-search">
-<i class="fa-brands fa-app-store-ios fa-2xl"></i>
-            <input type="text" placeholder="Procurar" id="lpSearchInput">
-        </div>
-
-        <div class="lp-grid">
-            <div class="lp-item" onclick="openModal('ativae')">
-                <img src="img/favicon.svg" alt="Ativae">
-                <span>Ativae</span>
-            </div>
-            <div class="lp-item" onclick="openModal('store')">
-                <img src="img/favicon-control.png" alt="Store">
-                <span>Store</span>
-            </div>
-            <div class="lp-item" onclick="openModal('finances')">
-                <img src="img/gestao.ico" alt="Finanças">
-                <span>Finanças</span>
-            </div>
-            <div class="lp-item" onclick="openModal('empty')">
-                <img src="img/novo-usuario.png" alt="Empty">
-                <span>What's Empty</span>
+            
+            <div class="lp-search">
+                <i class="fa-brands fa-app-store-ios"></i>
+                <input type="text" placeholder="Procurar" id="lpSearchInput">
             </div>
 
-            <div class="lp-item" onclick="openModal('whales')">
-                <img src="img/faviconwhale.svg" alt="WhalesGames">
-                <span>WhalesGames</span>
+            <div class="lp-grid" id="lpGrid">
+                <div class="lp-item" onclick="openModal('ativae')">
+                    <img src="img/favicon.svg" alt="Ativae">
+                    <span>Ativae</span>
+                </div>
+                <div class="lp-item" onclick="openModal('store')">
+                    <img src="img/favicon-control.png" alt="Store">
+                    <span>Store</span>
+                </div>
+                <div class="lp-item" onclick="openModal('finances')">
+                    <img src="img/gestao.ico" alt="Finanças">
+                    <span>Finanças</span>
+                </div>
+                <div class="lp-item" onclick="openModal('empty')">
+                    <img src="img/novo-usuario.png" alt="Empty">
+                    <span>What's Empty</span>
+                </div>
+                <div class="lp-item" onclick="openModal('whales')">
+                    <img src="img/faviconwhale.svg" alt="WhalesGames">
+                    <span>WhalesGames</span>
+                </div>
+               
+                <div class="lp-item add-btn" onclick="addNewApp()">
+                    <div class="add-icon-wrapper" style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 18px;">
+                        <i class="fa-solid fa-plus" style="font-size: 24px; color: #fff;"></i>
+                    </div>
+                    <span>Adicionar</span>
+                </div>
             </div>
-           
-    <div class="lp-item add-btn" onclick="addNewApp()">
-        <div class="add-icon-wrapper">
-            <i class="fa-solid fa-plus"></i>
-        </div>
-        <span>Adicionar</span>
-    </div>
-</div>
         </div>
     </div>
-</div>
 
     <div class="dock-container">
         <nav class="dock">
@@ -137,29 +137,34 @@
                 <img src="img/launchpad.webp" style="width: 85%; height: 85%;">
             </a>
             
-            <div class="dock-separator"></div>
+            <div class="dock-separator" style="width: 1px; height: 40px; background: rgba(255,255,255,0.1); align-self: center;"></div>
 
-            <a href="javascript:void(0)" onclick="openModal('linkedin')" class="dock-item li" data-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="javascript:void(0)" onclick="openModal('github')" class="dock-item gh" data-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="javascript:void(0)" onclick="openModal('linkedin')" class="dock-item li" draggable="true" data-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
             
-            <a href="javascript:void(0)" onclick="openModal('ativae')" class="dock-item at" data-label="Ativae">
+            <a href="javascript:void(0)" onclick="openModal('github')" class="dock-item gh" draggable="true" data-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="openModal('ativae')" class="dock-item at" draggable="true" data-label="Ativae">
                 <img src="img/favicon.svg" alt="Ativae">
             </a>
             
-            <a href="javascript:void(0)" onclick="openModal('store')" class="dock-item st" data-label="Store">
+            <a href="javascript:void(0)" onclick="openModal('store')" class="dock-item st" draggable="true" data-label="Store">
                 <img src="img/favicon-control.png" alt="Store">
             </a>
 
-            <a href="javascript:void(0)" onclick="openModal('empty')" class="dock-item em" data-label="What's Empty">
+            <a href="javascript:void(0)" onclick="openModal('empty')" class="dock-item em" draggable="true" data-label="What's Empty">
                 <img src="img/novo-usuario.png" alt="Empty">
             </a>
 
-            <a href="javascript:void(0)" onclick="openModal('finances')" class="dock-item fi" data-label="Finanças">
+            <a href="javascript:void(0)" onclick="openModal('finances')" class="dock-item fi" draggable="true" data-label="Finanças">
                 <img src="img/gestao.ico" alt="Finanças">
             </a>
 
-            <a href="javascript:void(0)" onclick="openModal('whales')" class="dock-item fi" data-label="whales">
-                <img src="img/faviconwhale.svg" alt="cheats">
+            <a href="javascript:void(0)" onclick="openModal('whales')" class="dock-item fi" draggable="true" data-label="WhalesGames">
+                <img src="img/faviconwhale.svg" alt="WhalesGames">
             </a>
         </nav>
     </div>
