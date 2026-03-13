@@ -262,3 +262,99 @@ iframe { width: 100%; height: 100%; border: none; background: #fff; }
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+
+
+/* --- RESPONSIVIDADE COMPLETA --- */
+
+/* 1. Ajuste do Grid de Conteúdo (Cards) */
+@media (max-width: 1024px) {
+    .grid {
+        grid-template-columns: 1fr; /* Transforma em 1 coluna */
+        gap: 20px;
+        padding: 20px;
+    }
+    .span-8, .span-4, .span-12 {
+        grid-column: span 1; /* Todos os cards ocupam a largura total */
+    }
+    .hero {
+        padding-bottom: 8vh;
+    }
+    .titulo-silver {
+        font-size: 3.5rem; /* Título menor para tablets */
+    }
+}
+
+/* 2. Ajuste do Launchpad para Mobile */
+@media (max-width: 768px) {
+    .lp-window {
+        width: 95%;
+        height: 85vh; /* Ocupa a maior parte da altura */
+        max-height: 90vh;
+    }
+
+    .lp-grid {
+        /* Reduz de 7 para 3 colunas em telemóveis para os ícones não ficarem minúsculos */
+        grid-template-columns: repeat(3, 1fr) !important; 
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .lp-item img, .add-icon-wrapper {
+        width: 55px;
+        height: 55px;
+    }
+
+    .lp-search input {
+        font-size: 18px;
+    }
+}
+
+/* 3. Ajuste da Dock e Elementos Fixos para Celulares Pequenos */
+@media (max-width: 480px) {
+    .titulo-silver {
+        font-size: 2.5rem; /* Ajuste para não quebrar o layout */
+    }
+
+    /* Reduz o tamanho da Dock para não tapar o conteúdo */
+    .dock-container {
+        bottom: 15px;
+        width: 95%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .dock {
+        gap: 8px;
+        padding: 8px;
+        overflow-x: auto; /* Permite scroll lateral na dock se houver muitos itens */
+        max-width: 100%;
+    }
+
+    .dock-item {
+        width: 42px;
+        height: 42px;
+        min-width: 42px; /* Evita que o flexbox encolha os ícones */
+    }
+
+    .dock-item i {
+        font-size: 18px;
+    }
+
+    .dock-item img {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Esconde as labels da dock no mobile para limpar o visual */
+    .dock-item::after {
+        display: none;
+    }
+}
+
+/* 4. Garantir que os Modais (Iframes) caibam no ecrã */
+.modal-win {
+    width: 98% !important;
+    height: 95% !important;
+}
