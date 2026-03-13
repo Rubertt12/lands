@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Rúbertt Silva | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="barra-sup">
+        <div style="display:flex; align-items:center; gap:12px">
+            <i class="fa-solid fa-shield-halved" style="color: var(--sotaque)"></i>
+            <span style="opacity: 0.9">RÚBERTT SILVA | SECURITY & SUPPORT</span>
+        </div>
+        <div style="margin-left:auto; opacity: 0.8"><span id="clock">00:00</span></div>
+    </div>
+
+    <div id="bg-canvas"></div>
+
+    <header id="header">
+        <div id="avatar-target" style="width:40px; height:40px;"></div>
+        <span style="margin-left:15px; font-weight: 500; font-size: 15px; letter-spacing: -0.3px;">Rúbertt Silva</span>
+    </header>
+
+    <img src="/img/1760728760003.jpg" alt="Rúbertt Silva" class="avatar-float" id="avatar">
+
+    <section class="hero">
+        <h1 class="titulo-silver">Suporte Técnico</h1>
+        <p style="color: #a1a1a6; font-size: 1.3rem; margin-top: 15px; font-weight: 400;">Field Service @ Voke | Cybersecurity Student</p>
+    </section>
+
+    <div class="grid">
+        <div class="card span-12">
+            <span style="color:var(--sotaque); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing: 1px;">Background</span>
+            <h2 style="margin-top:10px;">Trajetória</h2>
+            <p>
+                Iniciei no mundo digital configurando emuladores e hoje foco em <span class="destaque">Suporte Técnico</span>. Com sólida experiência em sustentação N3 e suporte crítico, busco unir a eficiência do hardware com a inteligência do software.
+            </p>
+        </div>
+
+        <div class="card span-8">
+            <h2>Experiência</h2>
+            <div class="exp-box">
+                <span class="date">2024 – Presente</span>
+                <h3>Voke (Midea Carrier)</h3>
+                <p><p>Responsável pelo <strong>Rollout</strong> de ativos e manutenção em modelo <strong>HaaS</strong> na Midea Carrier. Atuação em diagnóstico de hardware, gestão de inventário e suporte crítico presencial.</p></p>
+            </div>
+            <div class="exp-box" style="border:none; margin:0;">
+                <span class="date">2019 – 2023</span>
+                <h3>Ideia Business</h3>
+                <p>Como Assistente de TI III na Ideia Business, atuei no suporte avançado às plataformas de benefícios e assinatura digital (Ideia Signer). Fui responsável por realizar testes de vulnerabilidade (QA), identificar bugs e atuar como ponte técnica entre as necessidades dos clientes e a equipe de desenvolvimento</p>
+            </div>
+        </div>
+
+        <div class="card span-4">
+            <h2>Formação</h2>
+            <div style="margin-bottom:20px">
+                <h3 style="font-size:1.1rem">Graduação</h3>
+                <p>Segurança da Informação<br><span style="color:var(--sotaque); font-size: 0.9rem;">FADERGS (Em curso)</span></p>
+            </div>
+            <div>
+                <h3 style="font-size:1.1rem">Técnico</h3>
+                <p>Informática<br><span style="color:#34c759; font-size: 0.9rem;">Alcides Maya (Concluído)</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modal" onclick="if(event.target.id==='modal')closeModal()">
+        <div class="modal-win">
+            <div class="modal-bar">
+                <div class="dot close" onclick="closeModal()"></div>
+                <div class="dot min"></div>
+                <div class="dot max"></div>
+            </div>
+            <div id="modalContent" style="flex:1"></div>
+        </div>
+    </div>
+
+    <div class="dock-container">
+        <nav class="dock">
+            <a href="javascript:void(0)" onclick="openModal('linkedin')" class="dock-item li" data-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="javascript:void(0)" onclick="openModal('github')" class="dock-item gh" data-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            
+            <a href="javascript:void(0)" onclick="openModal('ativae')" class="dock-item at" data-label="Ativae">
+                <img src="img/favicon.svg" alt="Ativae">
+            </a>
+            
+            <a href="javascript:void(0)" onclick="openModal('store')" class="dock-item st" data-label="Store">
+                <img src="img/favicon-control.png" alt="Store">
+            </a>
+
+            <a href="javascript:void(0)" onclick="openModal('empty')" class="dock-item em" data-label="What's Empty">
+                <img src="img/novo-usuario.png" alt="Empty">
+            </a>
+
+            <a href="javascript:void(0)" onclick="openModal('finances')" class="dock-item fi" data-label="Finanças">
+                <img src="img/gestao.ico" alt="Finanças">
+            </a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
