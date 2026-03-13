@@ -86,18 +86,18 @@ document.getElementById('lpSearchInput')?.addEventListener('input', function(e) 
 
 // 4. MODAIS E LINKS
 function openModal(type) {
-    const key = type ? type.toLowerCase() : '';
-  const urls = {
-    ativae: "https://ativae-inventario-integrado.vercel.app/",
-    store: "https://storerubertt-master.vercel.app/",
-    empty: "https://whatsempty.vercel.app/",
-    whales: "https://whalesgames.vercel.app/", // Use a URL pública aqui
-    finances: "https://financesrubertt.vercel.app/",
-    linkedin: "https://br.linkedin.com/in/rubertt-ramires-da-silva",
-    github: "https://github.com/Rubertt12",
-};
+    const key = type.toLowerCase();
+    const urls = {
+        ativae: "https://ativae-inventario-integrado.vercel.app/",
+        store: "https://storerubertt-master.vercel.app/",
+        empty: "https://whatsempty.vercel.app/",
+        finances: "https://financesrubertt.vercel.app/",
+        whales: "https://whalesgames.vercel.app/",
+        linkedin: "https://br.linkedin.com/in/rubertt-ramires-da-silva",
+        github: "https://github.com/Rubertt12"
+    };
 
-    if (!urls[key]) return;
+   if (!urls[key]) return;
 
     // Fecha o launchpad se estiver aberto
     const lp = document.getElementById('launchpad');
@@ -171,3 +171,29 @@ function addNewApp() {
         alert("Senha incorreta.");
     }
 }
+
+
+
+// Feedback visual de clique (escala o ícone brevemente)
+    const activeItem = document.querySelector(`.lp-item[onclick*="${type}"]`);
+    if (activeItem) {
+        activeItem.style.transform = "scale(0.9)";
+        setTimeout(() => activeItem.style.transform = "", 150);
+    }
+
+    if (key === 'linkedin' || key === 'github') {
+        window.open(urls[key], '_blank');
+        if (document.getElementById('launchpad').classList.contains('active')) toggleLaunchpad();
+    } else {
+        const modal = document.getElementById('modal');
+        const content = document.getElementById('modalContent');
+        
+        if (modal && content) {
+            // Mostra um loader enquanto o iframe carrega (Opcional, melhora a experiência)
+            content.innerHTML = `<div class="loader-modal" style="color:white; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%)">Carregando...</div>
+                                 <iframe src="${urls[key]}" style="width:100%; height:100%; border:none; opacity:0; transition: opacity 0.5s;" onload="this.style.opacity='1'"></iframe>`;
+            
+            modal.classList.add('active');
+            if (document.getElementById('launchpad').classList.contains('active')) toggleLaunchpad();
+        }
+    }

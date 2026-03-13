@@ -2,6 +2,7 @@
     --bg: #000;
     --texto-silver: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
     --sotaque: #0071e3;
+    /* Vidro mais escuro e saturado para o efeito Apple */
     --vidro: rgba(28, 28, 30, 0.6);
     --borda: rgba(255, 255, 255, 0.08);
     --fonte: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -131,25 +132,24 @@ p { color: #a1a1a6; font-size: 1.1rem; line-height: 1.7; }
 .max { background: #27c93f; }
 iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
-/* RECORTE DO SPOTLIGHT / LAUNCHPAD (ESTILO IMAGEM ENVIADA) */
+/* LAUNCHPAD / SPOTLIGHT AJUSTADO */
 .lp-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 9999; display: none; align-items: center; justify-content: center;
-    /* background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(15px); */
     transition: all 0.3s ease;
 }
 .lp-overlay.active { display: flex; animation: fadeIn 0.3s; }
 
 .lp-window {
-    width: 90%; max-width: 650px; height: 500px;
-    background: rgba(45, 45, 45, 0.6);
-    backdrop-filter: blur(60px) saturate(200%);
-    -webkit-backdrop-filter: blur(60px) saturate(200%);
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 90%; max-width: 850px; height: 600px;
+    background: rgba(30, 30, 30, 0.45);
+    backdrop-filter: blur(50px) saturate(210%);
+    -webkit-backdrop-filter: blur(50px) saturate(210%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 50px 100px rgba(0,0,0,0.6);
     display: flex; flex-direction: column;
-    transform: scale(0.95); opacity: 0;
+    transform: scale(0.96); opacity: 0;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
 }
@@ -163,9 +163,9 @@ iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
 .lp-header {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 15px 25px 5px 25px;
+    padding: 20px 30px 5px 30px;
 }
-.lp-header-left { color: rgba(255,255,255,0.4); font-size: 13px; font-weight: 400; display: flex; align-items: center; gap: 8px; }
+.lp-header-left { color: rgba(255,255,255,0.4); font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
 
 .lp-fullscreen-btn {
     background: rgba(255,255,255,0.05); border: none; color: #fff;
@@ -175,212 +175,138 @@ iframe { width: 100%; height: 100%; border: none; background: #fff; }
 
 /* BUSCA ESTILO SPOTLIGHT REFINADA */
 .lp-search {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Espaço entre o ícone e o texto */
-    padding: 10px 0;
+    display: flex; align-items: center;
+    gap: 15px; padding: 10px 30px;
 }
 
 .lp-search i { 
-    font-size: 26px; 
+    font-size: 24px; 
     color: rgba(255, 255, 255, 0.7); 
-    /* IMPORTANTE: Ícones 'solid' precisam de weight 900 para renderizar */
-    font-weight: 900; 
-    width: 30px; /* Largura fixa para evitar saltos de layout */
-    text-align: center;
+    font-weight: 900 !important; /* CORREÇÃO DO ÍCONE QUEBRADO */
+    width: 30px; text-align: center;
 }
 
 .lp-search input { 
-    background: transparent; 
-    border: none; 
-    color: white; 
-    outline: none; 
-    width: 100%; 
-    font-size: 24px; 
-    font-weight: 300; 
-    letter-spacing: -0.5px;
+    background: transparent; border: none; color: white; outline: none; 
+    width: 100%; font-size: 24px; font-weight: 300; letter-spacing: -0.5px;
 }
+.lp-search input::placeholder { color: rgba(255, 255, 255, 0.3); }
 
-/* Estilo do Placeholder para manter a consistência */
-.lp-search input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
-}
-
+/* GRADE DE APPS (6 COLUNAS COMO NA REFERÊNCIA) */
 .lp-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 20px; padding: 25px; overflow-y: auto; flex: 1;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    gap: 20px; padding: 25px 30px;
+    overflow-y: auto; flex: 1; align-items: start;
 }
+
+/* ITEM DO APP */
 .lp-item {
     display: flex; flex-direction: column; align-items: center;
-    gap: 12px; cursor: pointer; padding: 15px; border-radius: 18px; transition: 0.2s;
+    justify-content: center; padding: 15px 5px; border-radius: 20px; 
+    transition: all 0.2s ease; cursor: pointer; height: fit-content; 
 }
-.lp-item:hover { background: rgba(255,255,255,0.1); }
-.lp-item img { width: 64px; height: 64px; border-radius: 14px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-.lp-item span { color: white; font-size: 13px; font-weight: 400; text-align: center; }
+.lp-item:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-2px); }
+
+.lp-item img, .add-icon-wrapper {
+    width: 72px; height: 72px; border-radius: 18px; /* Look Squircle Apple */
+    margin-bottom: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    transition: transform 0.2s ease; object-fit: cover; 
+}
+.lp-item:hover img { transform: scale(1.05); }
+
+.lp-item span {
+    font-size: 12px; color: rgba(255,255,255,0.9); text-align: center;
+    width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    letter-spacing: 0.2px; font-weight: 400;
+}
+
+/* --- RESPONSIVIDADE COMPLETA --- */
+@media (max-width: 1024px) {
+    .grid { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+    .span-8, .span-4, .span-12 { grid-column: span 1; }
+    .titulo-silver { font-size: 3.5rem; }
+    .lp-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .lp-window { width: 95%; height: 85vh; }
+    .lp-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px; padding: 15px; }
+    .lp-item img { width: 60px; height: 60px; border-radius: 15px; }
+    .lp-search input { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+    .titulo-silver { font-size: 2.5rem; }
+    .dock-container { bottom: 15px; width: 95%; justify-content: center; }
+    .dock { gap: 8px; padding: 8px; overflow-x: auto; max-width: 100%; }
+    .dock-item { width: 42px; height: 42px; min-width: 42px; }
+    .dock-item i { font-size: 18px; }
+    .dock-item img { width: 22px; height: 22px; }
+    .dock-item::after { display: none; }
+}
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 
 
-/* --- GRADE DE APPS (LAUNCHPAD) --- */
-.lp-grid {
-    display: grid;
-    /* Força exatamente 7 colunas */
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 15px;
-    padding: 25px;
-    width: 100%;
-    /* Alinha os itens no topo para a barra de seleção não esticar para baixo */
-    align-items: start; 
-    overflow-y: auto;
-}
+/* --- MELHORIAS VISUAIS EXTRA --- */
 
-/* --- ITEM DO APP (AJUSTE DO SELETOR COMPRIDO) --- */
-.lp-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* Reduzimos o padding lateral e ajustamos o vertical */
-    padding: 12px 5px; 
-    border-radius: 18px; 
-    transition: background 0.2s ease;
-    cursor: pointer;
-    /* Garante que o item não tente ocupar a altura total da linha */
-    height: fit-content; 
-}
-
-/* Fundo de seleção compacto */
-.lp-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.lp-item img, 
-.add-icon-wrapper {
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
-    margin-bottom: 8px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
-    /* Impede que o ícone estique */
-    object-fit: cover; 
-}
-
-/* Efeito de zoom no ícone ao passar o mouse */
-.lp-item:hover img, 
-.lp-item:hover .add-icon-wrapper {
-    transform: scale(1.05);
-}
-
-.lp-item span {
-    font-size: 11px;
-    color: #fff;
-    text-align: center;
-    width: 100%;
-    /* Impede que nomes longos quebrem o layout */
-    white-space: nowrap;
+/* Efeito de brilho suave nos cards ao passar o rato */
+.card {
+    position: relative;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
-
-
-
-/* --- RESPONSIVIDADE COMPLETA --- */
-
-/* 1. Ajuste do Grid de Conteúdo (Cards) */
-@media (max-width: 1024px) {
-    .grid {
-        grid-template-columns: 1fr; /* Transforma em 1 coluna */
-        gap: 20px;
-        padding: 20px;
-    }
-    .span-8, .span-4, .span-12 {
-        grid-column: span 1; /* Todos os cards ocupam a largura total */
-    }
-    .hero {
-        padding-bottom: 8vh;
-    }
-    .titulo-silver {
-        font-size: 3.5rem; /* Título menor para tablets */
-    }
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: 0.5s;
 }
 
-/* 2. Ajuste do Launchpad para Mobile */
-@media (max-width: 768px) {
-    .lp-window {
-        width: 95%;
-        height: 85vh; /* Ocupa a maior parte da altura */
-        max-height: 90vh;
-    }
-
-    .lp-grid {
-        /* Reduz de 7 para 3 colunas em telemóveis para os ícones não ficarem minúsculos */
-        grid-template-columns: repeat(3, 1fr) !important; 
-        gap: 10px;
-        padding: 15px;
-    }
-
-    .lp-item img, .add-icon-wrapper {
-        width: 55px;
-        height: 55px;
-    }
-
-    .lp-search input {
-        font-size: 18px;
-    }
+.card:hover::before {
+    left: 100%;
 }
 
-/* 3. Ajuste da Dock e Elementos Fixos para Celulares Pequenos */
-@media (max-width: 480px) {
-    .titulo-silver {
-        font-size: 2.5rem; /* Ajuste para não quebrar o layout */
-    }
-
-    /* Reduz o tamanho da Dock para não tapar o conteúdo */
-    .dock-container {
-        bottom: 15px;
-        width: 95%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .dock {
-        gap: 8px;
-        padding: 8px;
-        overflow-x: auto; /* Permite scroll lateral na dock se houver muitos itens */
-        max-width: 100%;
-    }
-
-    .dock-item {
-        width: 42px;
-        height: 42px;
-        min-width: 42px; /* Evita que o flexbox encolha os ícones */
-    }
-
-    .dock-item i {
-        font-size: 18px;
-    }
-
-    .dock-item img {
-        width: 22px;
-        height: 22px;
-    }
-
-    /* Esconde as labels da dock no mobile para limpar o visual */
-    .dock-item::after {
-        display: none;
-    }
+/* Melhoria no desfoque do Modal para foco total no conteúdo */
+.modal {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px) brightness(0.8);
+    -webkit-backdrop-filter: blur(10px) brightness(0.8);
 }
 
-/* 4. Garantir que os Modais (Iframes) caibam no ecrã */
-.modal-win {
-    width: 98% !important;
-    height: 95% !important;
+/* Estilo da barra de scroll personalizada (Estilo macOS) */
+.lp-grid::-webkit-scrollbar {
+    width: 6px;
+}
+.lp-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+.lp-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+.lp-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
-
-.lp-search i {
-    font-weight: 900 !important; /* Força o ícone a carregar */
+/* Animação de escala nos itens do Launchpad ao abrir */
+.lp-overlay.active .lp-item {
+    animation: itemAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
+
+@keyframes itemAppear {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Staggered animation: cada item aparece um pouco depois do outro */
+.lp-item:nth-child(1) { animation-delay: 0.05s; }
+.lp-item:nth-child(2) { animation-delay: 0.1s; }
+.lp-item:nth-child(3) { animation-delay: 0.15s; }
+.lp-item:nth-child(4) { animation-delay: 0.2s; }
+.lp-item:nth-child(5) { animation-delay: 0.25s; }
+.lp-item:nth-child(n+6) { animation-delay: 0.3s; }
