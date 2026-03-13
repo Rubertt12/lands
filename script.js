@@ -197,3 +197,28 @@ function addNewApp() {
             if (document.getElementById('launchpad').classList.contains('active')) toggleLaunchpad();
         }
     }
+
+
+
+
+    // Rastreamento de mouse para efeito de luz nos cards
+document.querySelectorAll('.card').forEach(card => {
+    card.onmousemove = e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
+    };
+});
+
+// Melhoria: Fechar modal ao clicar na tecla 'ESC'
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+        closeModal();
+        if (document.getElementById('launchpad').classList.contains('active')) {
+            toggleLaunchpad();
+        }
+    }
+});
