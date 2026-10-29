@@ -365,6 +365,11 @@
   }, { passive: true });
   ["touchend", "touchmove", "touchcancel"].forEach(type => document.addEventListener(type, () => clearTimeout(longPressTimer), { passive: true }));
 
+  const trashButton = dock.querySelector(".dock-trash");
+  trashButton?.addEventListener("click", () => {
+    showToast("Arraste um aplicativo da Dock até aqui para removê-lo.");
+  });
+
   dock.addEventListener("dragover", event => {
     if (!draggedApp) return;
     event.preventDefault();
