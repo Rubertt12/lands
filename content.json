@@ -31,5 +31,11 @@
       "status": "Concluído"
     }
   ],
-  "apps": []
+  "apps": [
+    {
+      "name": "Vincora",
+      "icon": "https://vincora-umber.vercel.app/img/vincora-mark.svg",
+      "url": "https://vincora-umber.vercel.app/master"
+    }
+  ]
 }
