@@ -112,6 +112,19 @@ p { color: #a1a1a6; font-size: 1.1rem; line-height: 1.7; }
 
 .dock-item i { color: #fff; font-size: 22px; }
 .dock-item img { width: 28px; height: 28px; object-fit: contain; }
+.dock-trash {
+    background: linear-gradient(145deg, rgba(180,190,205,.34), rgba(90,102,120,.28));
+    border: 1px solid rgba(255,255,255,.2);
+}
+.dock-trash i { color: rgba(255,255,255,.9); font-size: 23px; }
+.dock-trash:hover, .dock-trash.dock-drop-target { background: rgba(255,90,90,.25); }
+.dock-trash-separator { flex: 0 0 1px; margin-left: 2px; }
+body.light-mode .dock-trash {
+    background: linear-gradient(145deg, rgba(225,230,238,.9), rgba(180,190,205,.8));
+    border-color: rgba(45,55,72,.16);
+}
+body.light-mode .dock-trash i { color: #465064 !important; }
+
 
 .dock-item::after { 
     content: attr(data-label); position: absolute; bottom: 75px; 
