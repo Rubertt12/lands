@@ -33,9 +33,9 @@
   ],
   "apps": [
     {
-      "name": "teste",
-      "icon": "teste",
-      "url": "https://storerubertt-master.vercel.app/"
+      "name": "Cosplayc",
+      "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
+      "url": "https://cosplaychess-nine.vercel.app/"
     }
   ]
 }
