@@ -16,7 +16,7 @@ async function githubRequest(method, url, body) {
 function validContent(data) {
   if (!data || typeof data !== "object" || typeof data.headline !== "string" || typeof data.headlineAccent !== "string" || typeof data.subtitle !== "string") return false;
   if (data.headline.length > 100 || data.headlineAccent.length > 100 || data.subtitle.length > 500 || !Array.isArray(data.apps) || data.apps.length > 50) return false;
-  if (data.photo !== undefined && (typeof data.photo !== "string" || data.photo.length > 500 || !(/^(https?:\\/\\/|\\/img\\/[a-zA-Z0-9._-]+$)/i.test(data.photo)))) return false;
+  if (data.photo !== undefined && (typeof data.photo !== "string" || data.photo.length > 500 || (data.photo !== "" && !(/^(https?:\/\/|\/img\/[a-zA-Z0-9._-]+$)/i.test(data.photo)))) return false;
   return data.apps.every(app => app && typeof app.name === "string" && app.name.trim().length > 0 && app.name.length <= 60 &&
     typeof app.icon === "string" && app.icon.length <= 300 &&
     (!app.url || (typeof app.url === "string" && app.url.length <= 500 && /^https?:\/\//i.test(app.url))) &&
