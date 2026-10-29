@@ -12,3 +12,21 @@
 .app-field input{min-width:0;font-size:13px;padding:11px}
 .add-app-btn{justify-self:start;margin-bottom:6px}
 @media(max-width:680px){.app-editor-fields{grid-template-columns:1fr}.app-editor-card{padding:13px}.app-logo-preview{width:40px;height:40px}}
+
+/* Blocos individuais e editáveis do Launchpad */
+.apps-list{display:grid;gap:16px;margin:10px 0 14px}
+.app-editor-card{min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,rgba(21,32,48,.96),rgba(7,12,20,.94));border-radius:18px;padding:18px;display:grid;gap:15px;box-shadow:0 12px 28px rgba(0,0,0,.12)}
+.app-editor-head{display:flex;align-items:center;gap:12px;min-width:0}
+.app-editor-head strong{font-size:15px;overflow-wrap:anywhere;flex:1}
+.app-number{display:grid;place-items:center;min-width:30px;height:30px;border-radius:9px;background:rgba(98,215,255,.1);color:var(--cyan);font-size:11px;font-weight:800}
+.app-logo-preview{width:48px;height:48px;object-fit:contain;border-radius:13px;background:#202b3b;padding:5px;flex-shrink:0}
+.remove-app-btn{background:rgba(255,90,90,.09);border:1px solid rgba(255,120,120,.3);color:#ffaaaa;border-radius:9px;padding:9px 11px;cursor:pointer;font-weight:700;white-space:nowrap;font-size:12px}
+.app-editor-fields{display:grid;grid-template-columns:1fr 1.35fr 1.35fr;gap:12px}
+.app-field{display:grid;gap:8px;margin:0;font-size:12px;color:var(--muted);min-width:0}
+.app-field input{width:100%;min-width:0;font-size:13px;padding:12px}
+.app-card-hint{margin:0;color:var(--muted);font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.app-card-footer{display:flex;justify-content:flex-start}
+.app-card-status{font-size:11px;font-weight:750;letter-spacing:.04em;color:var(--cyan);background:rgba(98,215,255,.08);border:1px solid rgba(98,215,255,.16);border-radius:999px;padding:6px 9px}
+.apps-empty{padding:18px;border:1px dashed var(--line);border-radius:14px}
+.add-app-btn{justify-self:stretch;margin:4px 0 8px;min-height:48px;border-style:dashed}
+@media(max-width:680px){.app-editor-fields{grid-template-columns:1fr}.app-editor-card{padding:14px}.app-logo-preview{width:42px;height:42px}.app-editor-head{gap:8px}.remove-app-btn{padding:8px;font-size:11px}}
