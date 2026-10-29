@@ -450,21 +450,6 @@ body.light-mode .dock {
 body.light-mode .dock-item i { color: #ffffff !important; }
 
 
-.admin-access-link {
-    position: relative;
-    display: block;
-    width: fit-content;
-    margin: 28px auto 18px;
-    padding: 10px 16px;
-    border: 1px solid var(--borda);
-    border-radius: 999px;
-    color: #a1a1a6;
-    background: rgba(255,255,255,.035);
-    font-size: 12px;
-    text-decoration: none;
-    transition: color .2s ease, border-color .2s ease;
-}
-.admin-access-link:hover { color: var(--sotaque); border-color: var(--sotaque); }
 
 
 /* Launchpad -> Dock: fixar, arrastar e menu contextual */
@@ -537,8 +522,6 @@ body.light-mode .lp-grid::-webkit-scrollbar-thumb{background:rgba(60,75,100,.2)}
 body.light-mode .modal{background:rgba(225,231,241,.62)!important;backdrop-filter:blur(18px) brightness(1)!important}
 body.light-mode .modal-win{background:#f8faff!important;border-color:rgba(35,49,72,.16)!important;box-shadow:0 25px 90px rgba(30,43,65,.25)}
 body.light-mode .modal-bar{background:#eef1f7!important;border-bottom:1px solid rgba(35,49,72,.09)}
-body.light-mode .admin-access-link{color:#647084!important;background:rgba(255,255,255,.6)!important;border-color:rgba(40,55,80,.14)!important}
-body.light-mode .admin-access-link:hover{color:#0668c9!important}
 body.light-mode .dock-app-menu{color:#202735!important;background:rgba(250,251,255,.97)!important;border-color:rgba(35,49,72,.13)!important;box-shadow:0 12px 35px rgba(30,43,65,.2)!important}
 body.light-mode .dock-app-menu button:hover{background:rgba(35,65,110,.08)!important}
 body.light-mode .dock-toast{color:#202735!important;background:rgba(250,251,255,.97)!important;border-color:rgba(35,49,72,.13)!important;box-shadow:0 8px 25px rgba(30,43,65,.16)!important}
