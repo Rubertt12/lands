@@ -31,41 +31,5 @@
       "status": "Concluído"
     }
   ],
-  "apps": [
-    {
-      "name": "Ativae",
-      "icon": "img/favicon.svg",
-      "modalId": "ativae"
-    },
-    {
-      "name": "Finanças",
-      "icon": "img/gestao.ico",
-      "modalId": "finances"
-    },
-    {
-      "name": "What's Empty",
-      "icon": "img/novo-usuario.png",
-      "modalId": "empty"
-    },
-    {
-      "name": "WhalesGames",
-      "icon": "img/faviconwhale.svg",
-      "modalId": "whales"
-    },
-    {
-      "name": "RRN MANAGER",
-      "icon": "https://sistema-de-inventario-pearl.vercel.app/img/icon-png.png",
-      "url": "https://sistema-de-inventario-pearl.vercel.app/index.html"
-    },
-    {
-      "name": "Cosplay Chess",
-      "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
-      "url": "https://cosplaychess-nine.vercel.app/"
-    },
-    {
-      "name": "Vincora",
-      "icon": "https://vincora-umber.vercel.app/img/vincora-mark.svg",
-      "url": "https://vincora-umber.vercel.app/master"
-    }
-  ]
+  "apps": []
 }
