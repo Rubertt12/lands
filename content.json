@@ -43,5 +43,33 @@
       "icon": "https://vincora-umber.vercel.app/img/vincora-mark.svg",
       "url": "https://vincora-umber.vercel.app/master"
     }
+  ],
+  "roleLine": "Field Service @ Voke | Cybersecurity Student",
+  "backgroundText": "Iniciei no mundo digital configurando emuladores e hoje foco em Suporte Técnico. Com sólida experiência em sustentação N3 e suporte crítico, busco unir a eficiência do hardware com a inteligência do software.",
+  "experiences": [
+    {
+      "date": "2024 – Presente",
+      "title": "Voke (Midea Carrier)",
+      "description": "Responsável pelo Rollout de ativos e manutenção em modelo HaaS na Midea Carrier. Atuação em diagnóstico de hardware, gestão de inventário e suporte crítico presencial."
+    },
+    {
+      "date": "2019 – 2023",
+      "title": "Ideia Business",
+      "description": "Como Assistente de TI III, atuei no suporte avançado às plataformas de benefícios e assinatura digital (Ideia Signer). Realizei testes de QA, identifiquei bugs e fiz a ponte técnica entre clientes e desenvolvimento."
+    }
+  ],
+  "education": [
+    {
+      "category": "Graduação",
+      "title": "Segurança da Informação",
+      "institution": "FADERGS",
+      "status": "Em curso"
+    },
+    {
+      "category": "Técnico",
+      "title": "Informática",
+      "institution": "Alcides Maya",
+      "status": "Concluído"
+    }
   ]
 }
