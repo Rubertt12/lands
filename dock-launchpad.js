@@ -75,7 +75,7 @@
     menu = null;
   }
 
-  function showMenu(x, y, app, pinned, dockItem = null) {
+  function showMenu(x, y, app, pinned, dockItem = null, launchpadItem = null) {
     removeMenu();
     menu = document.createElement("div");
     menu.className = "dock-app-menu";
@@ -87,6 +87,20 @@
       action.addEventListener("click", () => { callback(); removeMenu(); });
       menu.appendChild(action);
     };
+    if (launchpadItem) {
+      addAction("Ocultar do Launchpad", () => {
+        const key = appKey(app);
+        let hidden = [];
+        try {
+          const stored = JSON.parse(localStorage.getItem("portfolio-launchpad-hidden-v1") || "[]");
+          if (Array.isArray(stored)) hidden = stored;
+        } catch {}
+        if (!hidden.includes(key)) hidden.push(key);
+        try { localStorage.setItem("portfolio-launchpad-hidden-v1", JSON.stringify(hidden)); } catch {}
+        applyHiddenLaunchpadItems();
+        showToast(app.name + " foi ocultado do Launchpad.");
+      });
+    }
     if (dockItem) {
       const items = [...dock.querySelectorAll(".dock-item:not(.lp-btn)")];
       const index = items.indexOf(dockItem);
@@ -154,6 +168,20 @@
         item.hidden = isHidden;
         item.classList.toggle("dock-item-hidden", isHidden);
       }
+    });
+  }
+
+  function applyHiddenLaunchpadItems() {
+    let hidden = [];
+    try { hidden = JSON.parse(localStorage.getItem("portfolio-launchpad-hidden-v1") || "[]"); } catch {}
+    if (!Array.isArray(hidden)) hidden = [];
+    grid.querySelectorAll(".lp-item").forEach(item => {
+      if (item.classList.contains("add-btn")) return;
+      const app = appData(item);
+      if (!app) return;
+      const isHidden = hidden.includes(appKey(app));
+      item.hidden = isHidden;
+      item.classList.toggle("lp-item-hidden", isHidden);
     });
   }
 
@@ -269,12 +297,14 @@
 
   function prepareItems() {
     grid.querySelectorAll(".lp-item").forEach(makePinButton);
+    applyHiddenLaunchpadItems();
   }
 
   prepareItems();
   renderPinned();
   applyDockOrder();
   applyHiddenDockItems();
+  applyHiddenLaunchpadItems();
   new MutationObserver(prepareItems).observe(grid, { childList: true, subtree: true });
 
   grid.addEventListener("dragstart", event => {
@@ -298,7 +328,7 @@
     const app = appData(item);
     if (!app) return;
     event.preventDefault();
-    showMenu(event.clientX, event.clientY, app, readPinned().some(existing => appKey(existing) === appKey(app)));
+    showMenu(event.clientX, event.clientY, app, readPinned().some(existing => appKey(existing) === appKey(app)), null, item);
   });
 
   grid.addEventListener("touchstart", event => {
@@ -308,7 +338,7 @@
     longPressTimer = setTimeout(() => {
       const rect = item.getBoundingClientRect();
       showMenu(rect.left + rect.width / 2, rect.top + rect.height / 2, app,
-        readPinned().some(existing => appKey(existing) === appKey(app)));
+        readPinned().some(existing => appKey(existing) === appKey(app)), null, item);
     }, 650);
   }, { passive: true });
   ["touchend", "touchmove", "touchcancel"].forEach(type => document.addEventListener(type, () => clearTimeout(longPressTimer), { passive: true }));
