@@ -91,10 +91,10 @@
       const items = [...dock.querySelectorAll(".dock-item:not(.lp-btn)")];
       const index = items.indexOf(dockItem);
       addAction("Mover para a esquerda", () => {
-        if (index > 0) dock.insertBefore(dockItem, items[index - 1]);
+        if (index > 0) { dock.insertBefore(dockItem, items[index - 1]); saveDockOrder(); }
       }, index <= 0);
       addAction("Mover para a direita", () => {
-        if (index >= 0 && index < items.length - 1) dock.insertBefore(items[index + 1], dockItem);
+        if (index >= 0 && index < items.length - 1) { dock.insertBefore(items[index + 1], dockItem); saveDockOrder(); }
       }, index < 0 || index >= items.length - 1);
       addAction("Remover da Dock", () => {
         if (dockItem.classList.contains("dock-pinned-app")) unpinApp(app);
@@ -120,6 +120,26 @@
     const top = Math.min(y, window.innerHeight - menu.offsetHeight - 8);
     menu.style.left = Math.max(8, left) + "px";
     menu.style.top = Math.max(8, top) + "px";
+  }
+
+  function saveDockOrder() {
+    const order = [...dock.querySelectorAll(".dock-item:not(.lp-btn)")].map(item => {
+      const app = appData(item);
+      return app ? appKey(app) : "";
+    }).filter(Boolean);
+    try { localStorage.setItem("portfolio-dock-order-v1", JSON.stringify(order)); } catch {}
+  }
+  function applyDockOrder() {
+    let order = [];
+    try { order = JSON.parse(localStorage.getItem("portfolio-dock-order-v1") || "[]"); } catch {}
+    if (!Array.isArray(order) || !order.length) return;
+    const items = [...dock.querySelectorAll(".dock-item:not(.lp-btn)")];
+    items.sort((a,b) => {
+      const aa=appData(a), bb=appData(b);
+      const ai=aa?order.indexOf(appKey(aa)):-1, bi=bb?order.indexOf(appKey(bb)):-1;
+      return (ai < 0 ? 9999 : ai) - (bi < 0 ? 9999 : bi);
+    });
+    items.forEach(item => dock.appendChild(item));
   }
 
   function applyHiddenDockItems() {
@@ -242,6 +262,7 @@
 
   prepareItems();
   renderPinned();
+  applyDockOrder();
   applyHiddenDockItems();
   new MutationObserver(prepareItems).observe(grid, { childList: true, subtree: true });
 
