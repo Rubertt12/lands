@@ -33,7 +33,7 @@
   ],
   "apps": [
     {
-      "name": "Cosplayc",
+      "name": "Cosplaychess",
       "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
       "url": "https://cosplaychess-nine.vercel.app/"
     }
