@@ -30,3 +30,5 @@
 .apps-empty{padding:18px;border:1px dashed var(--line);border-radius:14px}
 .add-app-btn{justify-self:stretch;margin:4px 0 8px;min-height:48px;border-style:dashed}
 @media(max-width:680px){.app-editor-fields{grid-template-columns:1fr}.app-editor-card{padding:14px}.app-logo-preview{width:42px;height:42px}.app-editor-head{gap:8px}.remove-app-btn{padding:8px;font-size:11px}}
+
+.record-fields{display:grid;grid-template-columns:1fr 1.5fr;gap:12px}.record-fields .app-field:last-child:nth-child(3){grid-column:1/-1}.record-fields textarea{font-size:13px;line-height:1.5;min-height:100px}@media(max-width:680px){.record-fields{grid-template-columns:1fr}.record-fields .app-field:last-child:nth-child(3){grid-column:auto}}
