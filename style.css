@@ -543,3 +543,8 @@ body.light-mode .dock-app-menu{color:#202735!important;background:rgba(250,251,2
 body.light-mode .dock-app-menu button:hover{background:rgba(35,65,110,.08)!important}
 body.light-mode .dock-toast{color:#202735!important;background:rgba(250,251,255,.97)!important;border-color:rgba(35,49,72,.13)!important;box-shadow:0 8px 25px rgba(30,43,65,.16)!important}
 body.light-mode .avatar-float{box-shadow:0 24px 55px rgba(35,48,72,.2),0 0 0 1px rgba(35,48,72,.1)!important}
+
+
+/* Ocultação persistente dos aplicativos nativos removidos da Dock */
+.dock .dock-item.dock-item-hidden,
+.dock .dock-item[hidden] { display: none !important; }
