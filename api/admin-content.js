@@ -40,7 +40,14 @@ module.exports = async function handler(req, res) {
     await githubRequest("PUT", api, { message: "Atualizar conteúdo do portfólio pelo painel administrativo", content: encoded, sha: existing.sha, branch: BRANCH });
     return res.status(200).json({ ok: true, message: "Alterações salvas. O Vercel iniciará uma nova publicação automaticamente." });
   } catch (error) {
-    console.error("Erro ao salvar conteúdo do portfólio:", error.message);
-    return res.status(502).json({ error: "Não foi possível salvar no GitHub. Verifique o token e as permissões do repositório." });
+    const detail = String(error.message || "");
+    console.error("Erro ao salvar conteúdo do portfólio:", detail);
+    if (/bad credentials|expired|invalid token/i.test(detail)) {
+      return res.status(502).json({ error: "O token do GitHub configurado no Vercel é inválido ou expirou. Atualize GITHUB_TOKEN e publique novamente." });
+    }
+    if (/resource not accessible|permission|forbidden/i.test(detail)) {
+      return res.status(502).json({ error: "O token do GitHub não tem permissão para alterar este repositório. Conceda acesso a Rubertt12/lands e Contents: Read and write." });
+    }
+    return res.status(502).json({ error: "Não foi possível salvar no GitHub. Confira GITHUB_TOKEN e as permissões Contents: Read and write." });
   }
 };
