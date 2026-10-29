@@ -21,7 +21,9 @@
         grid.replaceChildren();
         data.apps.slice(0, 50).forEach(app => {
           if (!app || typeof app.name !== "string") return;
-          const item = document.createElement("button");
+          const item = document.createElement("div");
+          item.setAttribute("role", "button");
+          item.tabIndex = 0;
           item.type = "button";
           item.className = "lp-item";
           item.style.background = "transparent";
@@ -40,6 +42,9 @@
           const label = document.createElement("span");
           label.textContent = app.name.slice(0, 60);
           item.append(icon, label);
+          item.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") { event.preventDefault(); item.click(); }
+          });
           item.addEventListener("click", () => {
             if (typeof app.modalId === "string" && app.modalId) {
               if (typeof window.openModal === "function") window.openModal(app.modalId);
