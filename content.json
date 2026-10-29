@@ -37,6 +37,11 @@
       "name": "Cosplay Chess",
       "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
       "url": "https://cosplaychess-nine.vercel.app/"
+    },
+    {
+      "name": "Vincora",
+      "icon": "https://vincora-umber.vercel.app/img/vincora-mark.svg",
+      "url": "https://vincora-umber.vercel.app/master"
     }
   ]
 }
