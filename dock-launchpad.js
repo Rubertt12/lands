@@ -217,7 +217,11 @@
 
   function pinApp(app) {
     if (!app || (!app.modalId && !safeUrl(app.url))) return;
-    const hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]");
+    let hidden = [];
+    try {
+      const stored = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]");
+      if (Array.isArray(stored)) hidden = stored;
+    } catch {}
     const key = appKey(app);
     if (hidden.includes(key)) {
       localStorage.setItem("portfolio-dock-hidden-v1", JSON.stringify(hidden.filter(item => item !== key)));
@@ -226,7 +230,6 @@
       return;
     }
     const apps = readPinned();
-    const key = appKey(app);
     if (apps.some(existing => appKey(existing) === key)) {
       showToast("Esse aplicativo já está fixado na Dock.");
       return;
