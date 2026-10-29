@@ -43,7 +43,7 @@ body {
 .avatar-float {
     width: 260px; height: 260px; border-radius: 55px;
     object-fit: cover; position: fixed; z-index: 4500;
-    top: 45%; left: 50%; transform: translate(-50%, -50%);
+    top: 35%; left: 50%; transform: translate(-50%, -50%);
     box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 0 1px var(--borda);
     pointer-events: none; transition: box-shadow 0.3s;
 }
@@ -448,3 +448,20 @@ body.light-mode .dock {
 
 /* Mantém os ícones da dock brancos (como são coloridos, precisam de contraste) */
 body.light-mode .dock-item i { color: #ffffff !important; }
+
+
+.admin-access-link {
+    position: relative;
+    display: block;
+    width: fit-content;
+    margin: 28px auto 18px;
+    padding: 10px 16px;
+    border: 1px solid var(--borda);
+    border-radius: 999px;
+    color: #a1a1a6;
+    background: rgba(255,255,255,.035);
+    font-size: 12px;
+    text-decoration: none;
+    transition: color .2s ease, border-color .2s ease;
+}
+.admin-access-link:hover { color: var(--sotaque); border-color: var(--sotaque); }
