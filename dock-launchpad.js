@@ -99,10 +99,12 @@
       addAction("Remover da Dock", () => {
         if (dockItem.classList.contains("dock-pinned-app")) unpinApp(app);
         else {
+          const key = appKey(app);
+          dockItem.classList.add("dock-item-hidden");
           dockItem.hidden = true;
           try {
-            const hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]");
-            const key = appKey(app);
+            const stored = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]");
+            const hidden = Array.isArray(stored) ? stored : [];
             if (!hidden.includes(key)) hidden.push(key);
             localStorage.setItem("portfolio-dock-hidden-v1", JSON.stringify(hidden));
           } catch {}
@@ -147,7 +149,11 @@
     try { hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]"); } catch {}
     dock.querySelectorAll(".dock-item:not(.lp-btn)").forEach(item => {
       const app = appData(item);
-      if (app) item.hidden = hidden.includes(appKey(app));
+      if (app) {
+        const isHidden = hidden.includes(appKey(app));
+        item.hidden = isHidden;
+        item.classList.toggle("dock-item-hidden", isHidden);
+      }
     });
   }
 
