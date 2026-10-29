@@ -138,10 +138,19 @@
     });
   }
 
+  function recordField(labelText,value,field,placeholder="",multiline=false){const wrap=document.createElement("label");wrap.className="app-field";wrap.append(document.createTextNode(labelText));const input=document.createElement(multiline?"textarea":"input");if(multiline)input.rows=4;input.value=value||"";input.placeholder=placeholder;input.dataset.field=field;input.maxLength=field==="description"?1200:240;wrap.append(input);return wrap;}
+  function renderExperiences(items){const list=$("experienceList");list.replaceChildren();(Array.isArray(items)?items:[]).forEach((item,index)=>{const card=document.createElement("article");card.className="app-editor-card";const head=document.createElement("div");head.className="app-editor-head";const title=document.createElement("strong");title.textContent=item.title||"Nova experiência";const remove=document.createElement("button");remove.type="button";remove.className="remove-app-btn";remove.textContent="Excluir";remove.addEventListener("click",()=>{const next=readExperiences();next.splice(index,1);renderExperiences(next);});head.append(title,remove);const fields=document.createElement("div");fields.className="record-fields";const date=recordField("Período",item.date,"date","Ex.: 2024 – Presente");const job=recordField("Cargo / empresa",item.title,"title","Ex.: Analista de Suporte");const desc=recordField("Descrição",item.description,"description","Principais atividades e resultados",true);job.querySelector("input").addEventListener("input",()=>title.textContent=job.querySelector("input").value||"Nova experiência");fields.append(date,job,desc);card.append(head,fields);list.append(card);});if(!list.children.length){const p=document.createElement("p");p.className="muted";p.textContent="Nenhuma experiência cadastrada.";list.append(p);}}
+  function readExperiences(){return Array.from($("experienceList").querySelectorAll(".app-editor-card")).map(card=>({date:card.querySelector('[data-field="date"]').value.trim(),title:card.querySelector('[data-field="title"]').value.trim(),description:card.querySelector('[data-field="description"]').value.trim()}));}
+  function renderEducation(items){const list=$("educationList");list.replaceChildren();(Array.isArray(items)?items:[]).forEach((item,index)=>{const card=document.createElement("article");card.className="app-editor-card";const head=document.createElement("div");head.className="app-editor-head";const title=document.createElement("strong");title.textContent=item.title||"Nova formação";const remove=document.createElement("button");remove.type="button";remove.className="remove-app-btn";remove.textContent="Excluir";remove.addEventListener("click",()=>{const next=readEducation();next.splice(index,1);renderEducation(next);});head.append(title,remove);const fields=document.createElement("div");fields.className="record-fields";const category=recordField("Tipo",item.category,"category","Ex.: Graduação");const course=recordField("Curso",item.title,"title","Ex.: Segurança da Informação");const institution=recordField("Instituição",item.institution,"institution","Nome da instituição");const status=recordField("Situação",item.status,"status","Ex.: Em curso / Concluído");course.querySelector("input").addEventListener("input",()=>title.textContent=course.querySelector("input").value||"Nova formação");fields.append(category,course,institution,status);card.append(head,fields);list.append(card);});if(!list.children.length){const p=document.createElement("p");p.className="muted";p.textContent="Nenhuma formação cadastrada.";list.append(p);}}
+  function readEducation(){return Array.from($("educationList").querySelectorAll(".app-editor-card")).map(card=>({category:card.querySelector('[data-field="category"]').value.trim(),title:card.querySelector('[data-field="title"]').value.trim(),institution:card.querySelector('[data-field="institution"]').value.trim(),status:card.querySelector('[data-field="status"]').value.trim()}));}
   function fill(data) {
     $("headline").value = data.headline || "";
     $("headlineAccent").value = data.headlineAccent || "";
     $("subtitle").value = data.subtitle || "";
+    $("roleLine").value = data.roleLine || "";
+    $("backgroundText").value = data.backgroundText || "";
+    renderExperiences(data.experiences || []);
+    renderEducation(data.education || []);
     $("photoUrl").value = data.photo || "";
     $("photoPreview").src = data.photo || "/img/1760728760003.jpg";
     renderApps(data.apps || []);
@@ -172,6 +181,8 @@
     }
   });
 
+  $("addExperienceBtn").addEventListener("click",()=>{const items=readExperiences();if(items.length>=30)return message("saveMessage","Limite de 30 experiências atingido.",true);items.push({date:"",title:"",description:""});renderExperiences(items);});
+  $("addEducationBtn").addEventListener("click",()=>{const items=readEducation();if(items.length>=20)return message("saveMessage","Limite de 20 formações atingido.",true);items.push({category:"",title:"",institution:"",status:""});renderEducation(items);});
   $("addAppBtn").addEventListener("click", () => {
     const apps = readAppsFromCards();
     if (apps.length >= 50) {
@@ -244,13 +255,10 @@
         const upload = await request("/api/admin-photo", { method: "POST", body: JSON.stringify({ name: photoFile.name, type: photoFile.type, data: encoded }) });
         photo = upload.path;
       }
-      const data = {
-        photo,
-        headline: $("headline").value.trim(),
-        headlineAccent: $("headlineAccent").value.trim(),
-        subtitle: $("subtitle").value.trim(),
-        apps
-      };
+      const experiences=readExperiences(), education=readEducation();
+      if(experiences.some(item=>!item.title||!item.description))throw new Error("Cada experiência precisa ter cargo/empresa e descrição.");
+      if(education.some(item=>!item.title||!item.institution))throw new Error("Cada formação precisa ter curso e instituição.");
+      const data={photo,headline:$("headline").value.trim(),headlineAccent:$("headlineAccent").value.trim(),subtitle:$("subtitle").value.trim(),roleLine:$("roleLine").value.trim(),backgroundText:$("backgroundText").value.trim(),experiences,education,apps};
       const result = await request("/api/admin-content", { method: "POST", body: JSON.stringify(data) });
       $("photoFile").value = "";
       message("saveMessage", result.message || "Alterações salvas.");
