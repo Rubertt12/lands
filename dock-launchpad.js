@@ -211,6 +211,8 @@
       item.draggable = true;
       dock.appendChild(item);
     });
+    applyDockOrder();
+    applyHiddenDockItems();
   }
 
   function pinApp(app) {
