@@ -32,7 +32,14 @@ module.exports = async function handler(req, res) {
     if (!response.ok) throw new Error(result.message || "Falha ao enviar imagem ao GitHub.");
     return res.status(200).json({ ok: true, path: "/" + path });
   } catch (error) {
-    console.error("Erro ao enviar foto do perfil:", error.message);
-    return res.status(502).json({ error: "Não foi possível enviar a foto ao GitHub. Verifique o token e as permissões do repositório." });
+    const detail = String(error.message || "");
+    console.error("Erro ao enviar foto do perfil:", detail);
+    if (/bad credentials|expired|invalid token/i.test(detail)) {
+      return res.status(502).json({ error: "O token do GitHub configurado no Vercel é inválido ou expirou. Atualize GITHUB_TOKEN e publique novamente." });
+    }
+    if (/resource not accessible|permission|forbidden/i.test(detail)) {
+      return res.status(502).json({ error: "O token do GitHub não tem permissão para enviar arquivos. Conceda acesso a Rubertt12/lands e Contents: Read and write." });
+    }
+    return res.status(502).json({ error: "Não foi possível enviar a foto ao GitHub. Confira GITHUB_TOKEN e as permissões Contents: Read and write." });
   }
 };
