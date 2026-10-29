@@ -1,0 +1,256 @@
+(() => {
+  const STORAGE_KEY = "portfolio-dock-pinned-apps-v1";
+  const dock = document.querySelector(".dock");
+  const grid = document.getElementById("lpGrid");
+  if (!dock || !grid) return;
+
+  let draggedApp = null;
+  let menu = null;
+  let longPressTimer = null;
+
+  const safeUrl = (value) => {
+    try {
+      const url = new URL(value, window.location.href);
+      return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+    } catch { return ""; }
+  };
+
+  function readPinned() {
+    try {
+      const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(value) ? value.filter(app => app && typeof app.name === "string") : [];
+    } catch { return []; }
+  }
+
+  function savePinned(apps) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(apps)); }
+    catch { console.warn("Não foi possível salvar a Dock neste navegador."); }
+  }
+
+  function appData(item) {
+    if (!item || item.classList.contains("add-btn")) return null;
+    const img = item.querySelector("img");
+    const name = (item.dataset.appName || item.querySelector("span")?.textContent || "").trim();
+    const onclick = item.getAttribute("onclick") || "";
+    const modalMatch = onclick.match(/openModal\(['"]([a-z0-9_-]+)['"]\)/i);
+    const modalId = item.dataset.modalId || modalMatch?.[1] || "";
+    const url = safeUrl(item.dataset.appUrl || item.dataset.url || "");
+    if (!name || (!modalId && !url)) return null;
+    return { name: name.slice(0, 60), icon: img?.getAttribute("src") || "img/favicon.svg", modalId, url };
+  }
+
+  function appKey(app) { return app.modalId ? "modal:" + app.modalId : "url:" + app.url; }
+
+  function openApp(app) {
+    if (app.modalId && typeof window.openModal === "function") {
+      window.openModal(app.modalId);
+      return;
+    }
+    const url = safeUrl(app.url);
+    if (!url) return;
+    const modal = document.getElementById("modal");
+    const content = document.getElementById("modalContent");
+    if (modal && content && new URL(url).origin !== window.location.origin) {
+      modal.classList.add("active");
+      content.replaceChildren();
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.title = app.name;
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      content.appendChild(iframe);
+    } else if (modal && content) {
+      modal.classList.add("active");
+      content.innerHTML = "";
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.title = app.name;
+      content.appendChild(iframe);
+    } else {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  }
+
+  function removeMenu() {
+    if (menu) menu.remove();
+    menu = null;
+  }
+
+  function showMenu(x, y, app, pinned) {
+    removeMenu();
+    menu = document.createElement("div");
+    menu.className = "dock-app-menu";
+    const action = document.createElement("button");
+    action.type = "button";
+    action.textContent = pinned ? "Desafixar da Dock" : "Fixar na Dock";
+    action.addEventListener("click", () => {
+      if (pinned) unpinApp(app);
+      else pinApp(app);
+      removeMenu();
+    });
+    menu.appendChild(action);
+    document.body.appendChild(menu);
+    const left = Math.min(x, window.innerWidth - menu.offsetWidth - 8);
+    const top = Math.min(y, window.innerHeight - menu.offsetHeight - 8);
+    menu.style.left = Math.max(8, left) + "px";
+    menu.style.top = Math.max(8, top) + "px";
+  }
+
+  function makePinButton(item) {
+    if (item.classList.contains("add-btn") || item.querySelector(".lp-pin-btn")) return;
+    const app = appData(item);
+    if (!app) return;
+    item.classList.add("lp-app-draggable");
+    item.draggable = true;
+    item.dataset.appName = app.name;
+    if (app.modalId) item.dataset.modalId = app.modalId;
+    if (app.url) item.dataset.appUrl = app.url;
+    const pin = document.createElement("button");
+    pin.type = "button";
+    pin.className = "lp-pin-btn";
+    pin.title = "Fixar na Dock";
+    pin.setAttribute("aria-label", "Fixar " + app.name + " na Dock");
+    pin.innerHTML = '<i class="fa-solid fa-thumbtack" aria-hidden="true"></i>';
+    pin.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      pinApp(app);
+    });
+    item.appendChild(pin);
+  }
+
+  function renderPinned() {
+    dock.querySelectorAll(".dock-pinned-app").forEach(item => item.remove());
+    readPinned().forEach(app => {
+      const item = document.createElement("a");
+      item.href = "javascript:void(0)";
+      item.className = "dock-item dock-pinned-app";
+      item.dataset.label = app.name;
+      item.dataset.appName = app.name;
+      item.setAttribute("aria-label", app.name);
+      if (app.modalId) item.dataset.modalId = app.modalId;
+      if (app.url) item.dataset.appUrl = app.url;
+      const icon = document.createElement("img");
+      icon.src = safeUrl(app.icon) || app.icon || "img/favicon.svg";
+      icon.alt = app.name;
+      item.appendChild(icon);
+      item.addEventListener("click", event => { event.preventDefault(); openApp(app); });
+      item.addEventListener("contextmenu", event => {
+        event.preventDefault();
+        showMenu(event.clientX, event.clientY, app, true);
+      });
+      item.addEventListener("dragstart", event => {
+        draggedApp = app;
+        event.dataTransfer.effectAllowed = "move";
+        event.dataTransfer.setData("text/plain", JSON.stringify(app));
+      });
+      item.draggable = true;
+      dock.appendChild(item);
+    });
+  }
+
+  function pinApp(app) {
+    if (!app || (!app.modalId && !safeUrl(app.url))) return;
+    const apps = readPinned();
+    const key = appKey(app);
+    if (apps.some(existing => appKey(existing) === key)) {
+      showToast("Esse aplicativo já está fixado na Dock.");
+      return;
+    }
+    apps.push({ name: app.name, icon: app.icon || "img/favicon.svg", modalId: app.modalId || "", url: safeUrl(app.url) });
+    savePinned(apps);
+    renderPinned();
+    showToast(app.name + " foi fixado na Dock.");
+  }
+
+  function unpinApp(app) {
+    savePinned(readPinned().filter(existing => appKey(existing) !== appKey(app)));
+    renderPinned();
+    showToast(app.name + " foi removido da Dock.");
+  }
+
+  let toastTimer;
+  function showToast(message) {
+    let toast = document.getElementById("dock-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "dock-toast";
+      toast.className = "dock-toast";
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add("visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("visible"), 2200);
+  }
+
+  function prepareItems() {
+    grid.querySelectorAll(".lp-item").forEach(makePinButton);
+  }
+
+  prepareItems();
+  renderPinned();
+  new MutationObserver(prepareItems).observe(grid, { childList: true, subtree: true });
+
+  grid.addEventListener("dragstart", event => {
+    const item = event.target.closest(".lp-item");
+    const app = appData(item);
+    if (!app) { event.preventDefault(); return; }
+    draggedApp = app;
+    event.dataTransfer.effectAllowed = "copy";
+    event.dataTransfer.setData("text/plain", JSON.stringify(app));
+    item.classList.add("dragging");
+  });
+
+  grid.addEventListener("dragend", event => {
+    event.target.closest(".lp-item")?.classList.remove("dragging");
+    dock.classList.remove("dock-drop-target");
+    draggedApp = null;
+  });
+
+  grid.addEventListener("contextmenu", event => {
+    const item = event.target.closest(".lp-item");
+    const app = appData(item);
+    if (!app) return;
+    event.preventDefault();
+    showMenu(event.clientX, event.clientY, app, readPinned().some(existing => appKey(existing) === appKey(app)));
+  });
+
+  grid.addEventListener("touchstart", event => {
+    const item = event.target.closest(".lp-item");
+    const app = appData(item);
+    if (!app || event.target.closest(".lp-pin-btn")) return;
+    longPressTimer = setTimeout(() => {
+      const rect = item.getBoundingClientRect();
+      showMenu(rect.left + rect.width / 2, rect.top + rect.height / 2, app,
+        readPinned().some(existing => appKey(existing) === appKey(app)));
+    }, 650);
+  }, { passive: true });
+  ["touchend", "touchmove", "touchcancel"].forEach(type => document.addEventListener(type, () => clearTimeout(longPressTimer), { passive: true }));
+
+  dock.addEventListener("dragover", event => {
+    if (!draggedApp) return;
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+    dock.classList.add("dock-drop-target");
+  });
+  dock.addEventListener("dragleave", event => {
+    if (!dock.contains(event.relatedTarget)) dock.classList.remove("dock-drop-target");
+  });
+  dock.addEventListener("drop", event => {
+    event.preventDefault();
+    dock.classList.remove("dock-drop-target");
+    let app = draggedApp;
+    if (!app) {
+      try { app = JSON.parse(event.dataTransfer.getData("text/plain")); } catch {}
+    }
+    if (app) pinApp(app);
+    draggedApp = null;
+  });
+
+  document.addEventListener("click", event => {
+    if (menu && !menu.contains(event.target)) removeMenu();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") removeMenu();
+  });
+})();
