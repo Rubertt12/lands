@@ -210,12 +210,37 @@
       const photoFile = $("photoFile").files && $("photoFile").files[0];
       if (photoFile && !photo) {
         message("saveMessage", "Enviando foto…");
-        const encoded = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onerror = () => reject(new Error("Não foi possível ler a imagem selecionada."));
-          reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
-          reader.readAsDataURL(photoFile);
-        });
+        const encoded = await (async () => {
+          const toBase64 = bytes => {
+            let binary = "";
+            const chunkSize = 0x8000;
+            for (let i = 0; i < bytes.length; i += chunkSize) {
+              binary += String.fromCharCode(...bytes.subarray(i, i + chunkSize));
+            }
+            return btoa(binary);
+          };
+          try {
+            if (typeof photoFile.arrayBuffer === "function") {
+              return toBase64(new Uint8Array(await photoFile.arrayBuffer()));
+            }
+          } catch (arrayBufferError) {
+            console.warn("Leitura via ArrayBuffer falhou; tentando FileReader.", arrayBufferError);
+          }
+          return await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onerror = () => reject(new Error(
+              "O navegador não conseguiu acessar esse arquivo da galeria. Tente selecionar a foto novamente ou escolha uma cópia em Downloads/Arquivos."
+            ));
+            reader.onabort = () => reject(new Error("A leitura da foto foi cancelada. Selecione o arquivo novamente."));
+            reader.onload = () => {
+              const result = String(reader.result || "");
+              const comma = result.indexOf(",");
+              if (comma < 0) return reject(new Error("Não foi possível converter a foto. Tente salvar uma cópia da imagem e selecioná-la novamente."));
+              resolve(result.slice(comma + 1));
+            };
+            reader.readAsDataURL(photoFile);
+          });
+        })();
         const upload = await request("/api/admin-photo", { method: "POST", body: JSON.stringify({ name: photoFile.name, type: photoFile.type, data: encoded }) });
         photo = upload.path;
       }
