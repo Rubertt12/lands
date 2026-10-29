@@ -142,6 +142,8 @@
     $("headline").value = data.headline || "";
     $("headlineAccent").value = data.headlineAccent || "";
     $("subtitle").value = data.subtitle || "";
+    $("photoUrl").value = data.photo || "";
+    $("photoPreview").src = data.photo || "/img/1760728760003.jpg";
     renderApps(data.apps || []);
   }
 
@@ -150,6 +152,25 @@
     if (!response.ok) throw new Error("Não foi possível carregar o conteúdo atual.");
     fill(await response.json());
   }
+
+  $("photoFile").addEventListener("change", () => {
+    const file = $("photoFile").files && $("photoFile").files[0];
+    if (!file) return;
+    if (!/^image\\/(jpeg|png|webp|gif)$/.test(file.type) || file.size > 3 * 1024 * 1024) {
+      $("photoFile").value = "";
+      message("saveMessage", "Escolha uma imagem JPG, PNG, WEBP ou GIF de até 3 MB.", true);
+      return;
+    }
+    $("photoPreview").src = URL.createObjectURL(file);
+    $("photoUrl").value = "";
+  });
+
+  $("photoUrl").addEventListener("input", () => {
+    if ($("photoUrl").value.trim()) {
+      $("photoPreview").src = $("photoUrl").value.trim();
+      $("photoFile").value = "";
+    }
+  });
 
   $("addAppBtn").addEventListener("click", () => {
     const apps = readAppsFromCards();
@@ -185,13 +206,28 @@
       if (apps.some(app => !app.name)) throw new Error("Cada bloco precisa ter um nome. Preencha ou exclua os blocos vazios.");
       if (apps.some(app => app.url && !/^https?:\/\//i.test(app.url))) throw new Error("Os links dos projetos devem começar com http:// ou https://.");
       if (apps.some(app => /^(javascript|data):/i.test(app.icon))) throw new Error("A logo deve ser um caminho de imagem ou URL HTTP/HTTPS.");
+      let photo = $("photoUrl").value.trim();
+      const photoFile = $("photoFile").files && $("photoFile").files[0];
+      if (photoFile && !photo) {
+        message("saveMessage", "Enviando foto…");
+        const encoded = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = () => reject(new Error("Não foi possível ler a imagem selecionada."));
+          reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+          reader.readAsDataURL(photoFile);
+        });
+        const upload = await request("/api/admin-photo", { method: "POST", body: JSON.stringify({ name: photoFile.name, type: photoFile.type, data: encoded }) });
+        photo = upload.path;
+      }
       const data = {
+        photo,
         headline: $("headline").value.trim(),
         headlineAccent: $("headlineAccent").value.trim(),
         subtitle: $("subtitle").value.trim(),
         apps
       };
       const result = await request("/api/admin-content", { method: "POST", body: JSON.stringify(data) });
+      $("photoFile").value = "";
       message("saveMessage", result.message || "Alterações salvas.");
     } catch (error) {
       message("saveMessage", error.message, true);
