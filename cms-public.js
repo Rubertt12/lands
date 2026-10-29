@@ -5,6 +5,8 @@
       const response = await fetch("/content.json", { cache: "no-store" });
       if (!response.ok) return;
       const data = await response.json();
+      const avatar = document.getElementById("avatar");
+      if (avatar && typeof data.photo === "string" && data.photo) avatar.src = data.photo;
       const title = document.querySelector(".titulo-silver");
       if (title) {
         title.replaceChildren();
