@@ -30,6 +30,9 @@
           item.style.font = "inherit";
           item.style.cursor = "pointer";
           item.setAttribute("aria-label", "Abrir " + app.name.slice(0, 60));
+          item.dataset.appName = app.name.slice(0, 60);
+          if (typeof app.modalId === "string" && app.modalId) item.dataset.modalId = app.modalId;
+          if (typeof app.url === "string" && app.url) item.dataset.appUrl = app.url;
           const icon = document.createElement("img");
           icon.src = textValue(app.icon, "img/favicon.svg");
           icon.alt = "";
