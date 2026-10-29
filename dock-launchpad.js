@@ -30,7 +30,7 @@
   function appData(item) {
     if (!item || item.classList.contains("add-btn")) return null;
     const img = item.querySelector("img");
-    const name = (item.dataset.appName || item.querySelector("span")?.textContent || "").trim();
+    const name = (item.dataset.appName || item.dataset.label || item.querySelector("span")?.textContent || "").trim();
     const onclick = item.getAttribute("onclick") || "";
     const modalMatch = onclick.match(/openModal\(['"]([a-z0-9_-]+)['"]\)/i);
     const modalId = item.dataset.modalId || modalMatch?.[1] || "";
