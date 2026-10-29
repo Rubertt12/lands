@@ -34,7 +34,7 @@
     const onclick = item.getAttribute("onclick") || "";
     const modalMatch = onclick.match(/openModal\(['"]([a-z0-9_-]+)['"]\)/i);
     const modalId = item.dataset.modalId || modalMatch?.[1] || "";
-    const url = safeUrl(item.dataset.appUrl || item.dataset.url || "");
+    const url = safeUrl(item.dataset.appUrl || item.dataset.url || (item instanceof HTMLAnchorElement ? item.href : ""));
     if (!name || (!modalId && !url)) return null;
     return { name: name.slice(0, 60), icon: img?.getAttribute("src") || "img/favicon.svg", modalId, url };
   }
