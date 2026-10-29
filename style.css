@@ -536,3 +536,19 @@ body.light-mode .avatar-float{box-shadow:0 24px 55px rgba(35,48,72,.2),0 0 0 1px
 /* Ocultar aplicativos do Launchpad sem depender do estilo padrão de [hidden] */
 .lp-grid .lp-item.lp-item-hidden,
 .lp-grid .lp-item[hidden] { display: none !important; }
+
+
+
+.lp-hide-btn {
+    position: absolute; top: 7px; left: 7px; z-index: 2;
+    width: 27px; height: 27px; border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%; color: #fff; background: rgba(25,25,28,.82);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; transform: scale(.9);
+    transition: opacity .18s ease, transform .18s ease;
+}
+.lp-item:hover .lp-hide-btn, .lp-hide-btn:focus-visible { opacity: 1; transform: scale(1); }
+@media (hover: none) {
+    .lp-hide-btn { opacity: 1; transform: none; }
+}
+body.light-mode .lp-hide-btn { color:#fff!important; background:rgba(36,48,68,.88)!important; border-color:rgba(255,255,255,.3)!important; }
