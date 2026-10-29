@@ -1,6 +1,6 @@
 {
-  "headline": "Tecnologia que",
-  "headlineAccent": "resolve problemas.",
+  "headline": "SUPORTE TECNICO",
+  "headlineAccent": "Tecnologia que resolve problemas.",
   "subtitle": "Sou Rúbertt Silva, profissional de TI com experiência em suporte técnico, gestão de ativos e sustentação de ambientes corporativos.",
   "apps": [
     {
@@ -32,11 +32,6 @@
       "name": "RRN MANAGER",
       "icon": "https://sistema-de-inventario-pearl.vercel.app/img/icon-png.png",
       "url": "https://sistema-de-inventario-pearl.vercel.app/index.html"
-    },
-    {
-      "name": "COSPLAYCHESS",
-      "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
-      "url": "https://cosplaychess-nine.vercel.app/"
     }
   ]
 }
