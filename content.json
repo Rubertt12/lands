@@ -27,6 +27,11 @@
       "name": "WhalesGames",
       "icon": "img/faviconwhale.svg",
       "modalId": "whales"
+    },
+    {
+      "name": "RRN MANAGER",
+      "icon": "https://sistema-de-inventario-pearl.vercel.app/img/icon-png.png",
+      "url": "https://sistema-de-inventario-pearl.vercel.app/index.html"
     }
   ]
 }
