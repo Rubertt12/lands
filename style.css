@@ -504,3 +504,42 @@ body.light-mode .dock-item i { color: #ffffff !important; }
 @media (hover: none) {
     .lp-pin-btn { opacity: 1; transform: none; }
 }
+
+/* WHITE MODE refinado */
+body.light-mode{--bg:#f4f6fa;--vidro:rgba(255,255,255,.76);--borda:rgba(30,41,59,.10);--sotaque:#0668c9;background:#f4f6fa!important;color:#202735!important;color-scheme:light}
+body.light-mode #bg-canvas{background:radial-gradient(ellipse at 12% 8%,rgba(87,151,255,.15),transparent 38%),radial-gradient(ellipse at 88% 32%,rgba(173,132,255,.12),transparent 35%),linear-gradient(145deg,#f8faff,#eef2f8 52%,#f8f9fc)!important;animation:none!important}
+body.light-mode .barra-sup,body.light-mode header{background:rgba(250,251,255,.82)!important;color:#313744!important;border-bottom:1px solid rgba(31,41,55,.09)!important;box-shadow:0 3px 18px rgba(40,55,80,.035)}
+body.light-mode .barra-sup span,body.light-mode header span{color:#313744!important}
+body.light-mode .titulo-silver{background:linear-gradient(180deg,#171d2a,#596579)!important;-webkit-background-clip:text!important;background-clip:text!important;-webkit-text-fill-color:transparent!important;filter:drop-shadow(0 7px 20px rgba(40,55,80,.08))!important}
+body.light-mode .card{background:rgba(255,255,255,.78)!important;border:1px solid rgba(39,54,78,.09)!important;box-shadow:0 14px 40px rgba(35,48,72,.055),inset 0 1px 0 rgba(255,255,255,.9);backdrop-filter:blur(28px)}
+body.light-mode .card:hover{border-color:rgba(0,102,204,.24)!important;box-shadow:0 20px 46px rgba(35,48,72,.09)}
+body.light-mode h2,body.light-mode h3,body.light-mode .destaque{color:#202735!important}
+body.light-mode p{color:#5d6676!important}
+body.light-mode .exp-box{border-left-color:#d8dfeb!important}
+body.light-mode .exp-box:hover{border-left-color:var(--sotaque)!important}
+body.light-mode .date{color:#0668c9!important}
+body.light-mode .dock{background:rgba(255,255,255,.72)!important;border:1px solid rgba(38,52,75,.12)!important;box-shadow:0 18px 48px rgba(32,44,65,.17),inset 0 1px 0 rgba(255,255,255,.95)!important;backdrop-filter:blur(35px) saturate(170%)}
+body.light-mode .dock-separator{background:rgba(35,45,60,.16)!important}
+body.light-mode .dock-item::after{background:rgba(255,255,255,.97)!important;color:#222b3a!important;border-color:rgba(30,41,59,.12)!important;box-shadow:0 8px 25px rgba(30,41,59,.12)}
+body.light-mode .dock-item i{color:#fff!important}
+body.light-mode .dock-pinned-app{background:rgba(35,55,85,.07)!important}
+body.light-mode .lp-window{background:rgba(249,251,255,.91)!important;border:1px solid rgba(40,53,76,.15)!important;box-shadow:0 35px 100px rgba(30,43,65,.24)!important}
+body.light-mode .lp-header-left{color:#778195!important}
+body.light-mode .lp-fullscreen-btn{color:#354052!important;background:rgba(40,55,80,.07)!important}
+body.light-mode .lp-search{border-bottom:1px solid rgba(35,49,72,.09)}
+body.light-mode .lp-search i{color:#697589!important}
+body.light-mode .lp-search input{color:#202735!important}
+body.light-mode .lp-search input::placeholder{color:#929bad!important}
+body.light-mode .lp-item:hover{background:rgba(45,85,145,.08)!important}
+body.light-mode .lp-item span{color:#30394a!important}
+body.light-mode .lp-pin-btn{color:#fff!important;background:rgba(36,48,68,.88)!important;border-color:rgba(255,255,255,.3)!important}
+body.light-mode .lp-grid::-webkit-scrollbar-thumb{background:rgba(60,75,100,.2)}
+body.light-mode .modal{background:rgba(225,231,241,.62)!important;backdrop-filter:blur(18px) brightness(1)!important}
+body.light-mode .modal-win{background:#f8faff!important;border-color:rgba(35,49,72,.16)!important;box-shadow:0 25px 90px rgba(30,43,65,.25)}
+body.light-mode .modal-bar{background:#eef1f7!important;border-bottom:1px solid rgba(35,49,72,.09)}
+body.light-mode .admin-access-link{color:#647084!important;background:rgba(255,255,255,.6)!important;border-color:rgba(40,55,80,.14)!important}
+body.light-mode .admin-access-link:hover{color:#0668c9!important}
+body.light-mode .dock-app-menu{color:#202735!important;background:rgba(250,251,255,.97)!important;border-color:rgba(35,49,72,.13)!important;box-shadow:0 12px 35px rgba(30,43,65,.2)!important}
+body.light-mode .dock-app-menu button:hover{background:rgba(35,65,110,.08)!important}
+body.light-mode .dock-toast{color:#202735!important;background:rgba(250,251,255,.97)!important;border-color:rgba(35,49,72,.13)!important;box-shadow:0 8px 25px rgba(30,43,65,.16)!important}
+body.light-mode .avatar-float{box-shadow:0 24px 55px rgba(35,48,72,.2),0 0 0 1px rgba(35,48,72,.1)!important}
