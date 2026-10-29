@@ -75,19 +75,46 @@
     menu = null;
   }
 
-  function showMenu(x, y, app, pinned) {
+  function showMenu(x, y, app, pinned, dockItem = null) {
     removeMenu();
     menu = document.createElement("div");
     menu.className = "dock-app-menu";
-    const action = document.createElement("button");
-    action.type = "button";
-    action.textContent = pinned ? "Desafixar da Dock" : "Fixar na Dock";
-    action.addEventListener("click", () => {
-      if (pinned) unpinApp(app);
-      else pinApp(app);
-      removeMenu();
-    });
-    menu.appendChild(action);
+    const addAction = (label, callback, disabled = false) => {
+      const action = document.createElement("button");
+      action.type = "button";
+      action.textContent = label;
+      action.disabled = disabled;
+      action.addEventListener("click", () => { callback(); removeMenu(); });
+      menu.appendChild(action);
+    };
+    if (dockItem) {
+      const items = [...dock.querySelectorAll(".dock-item:not(.lp-btn)")];
+      const index = items.indexOf(dockItem);
+      addAction("Mover para a esquerda", () => {
+        if (index > 0) dock.insertBefore(dockItem, items[index - 1]);
+      }, index <= 0);
+      addAction("Mover para a direita", () => {
+        if (index >= 0 && index < items.length - 1) dock.insertBefore(items[index + 1], dockItem);
+      }, index < 0 || index >= items.length - 1);
+      addAction("Remover da Dock", () => {
+        if (dockItem.classList.contains("dock-pinned-app")) unpinApp(app);
+        else {
+          dockItem.hidden = true;
+          try {
+            const hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]");
+            const key = appKey(app);
+            if (!hidden.includes(key)) hidden.push(key);
+            localStorage.setItem("portfolio-dock-hidden-v1", JSON.stringify(hidden));
+          } catch {}
+          showToast(app.name + " foi removido da Dock.");
+        }
+      });
+    } else {
+      addAction(pinned ? "Desafixar da Dock" : "Fixar na Dock", () => {
+        if (pinned) unpinApp(app);
+        else pinApp(app);
+      });
+    }
     document.body.appendChild(menu);
     const left = Math.min(x, window.innerWidth - menu.offsetWidth - 8);
     const top = Math.min(y, window.innerHeight - menu.offsetHeight - 8);
@@ -136,7 +163,7 @@
       item.addEventListener("click", event => { event.preventDefault(); openApp(app); });
       item.addEventListener("contextmenu", event => {
         event.preventDefault();
-        showMenu(event.clientX, event.clientY, app, true);
+        showMenu(event.clientX, event.clientY, app, true, item);
       });
       item.addEventListener("dragstart", event => {
         draggedApp = app;
