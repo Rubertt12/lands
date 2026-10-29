@@ -24,7 +24,10 @@
       const educationList=document.getElementById("educationList");if(educationList&&Array.isArray(data.education)){educationList.replaceChildren();data.education.slice(0,20).forEach(item=>{if(!item||typeof item.title!=="string")return;const box=document.createElement("div");box.style.marginBottom="20px";const category=document.createElement("h3");category.style.fontSize="1.1rem";category.textContent=textValue(item.category,"Formação");const p=document.createElement("p");p.append(document.createTextNode(textValue(item.title,"")),document.createElement("br"));const detail=document.createElement("span");detail.style.color="var(--sotaque)";detail.style.fontSize=".9rem";detail.textContent=[textValue(item.institution,""),textValue(item.status,"")].filter(Boolean).join(" · ");p.append(detail);box.append(category,p);educationList.append(box);});const last=educationList.lastElementChild;if(last)last.style.marginBottom="0";}
       const grid = document.getElementById("lpGrid");
       if (grid && Array.isArray(data.apps)) {
-        grid.replaceChildren();
+        // Preserve os aplicativos nativos definidos no index.html.
+        // Apenas os itens gerenciados pelo Admin são removidos e recriados.
+        grid.querySelectorAll('[data-admin-app="true"]').forEach(item => item.remove());
+        const addButton = grid.querySelector(".add-btn");
         data.apps.slice(0, 50).forEach(app => {
           if (!app || typeof app.name !== "string") return;
           const item = document.createElement("div");
@@ -32,6 +35,7 @@
           item.tabIndex = 0;
           item.type = "button";
           item.className = "lp-item";
+          item.dataset.adminApp = "true";
           item.style.background = "transparent";
           item.style.border = "0";
           item.style.color = "inherit";
@@ -61,7 +65,8 @@
               } catch {}
             }
           });
-          grid.append(item);
+          if (addButton) grid.insertBefore(item, addButton);
+          else grid.append(item);
         });
       }
     } catch (error) {
