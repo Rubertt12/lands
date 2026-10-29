@@ -1,4 +1,4 @@
-const { readSession, isSameOrigin } = require("../lib/admin-auth");
+const { isSameOrigin } = require("../lib/admin-auth");
 const OWNER = process.env.GITHUB_OWNER || "Rubertt12";
 const REPO = process.env.GITHUB_REPO || "lands";
 const BRANCH = process.env.GITHUB_BRANCH || "main";
@@ -26,7 +26,6 @@ module.exports = async function handler(req, res) {
   res.setHeader("X-Content-Type-Options", "nosniff");
   if (req.method !== "POST") { res.setHeader("Allow", "POST"); return res.status(405).json({ error: "Método não permitido." }); }
   if (!isSameOrigin(req)) return res.status(403).json({ error: "Origem não autorizada." });
-  if (!readSession(req)) return res.status(401).json({ error: "Sessão expirada. Entre novamente." });
   if (!process.env.GITHUB_TOKEN) return res.status(503).json({ error: "Configure GITHUB_TOKEN nas variáveis do Vercel." });
   if (!validContent(req.body)) return res.status(400).json({ error: "Revise os campos. O conteúdo enviado não passou pela validação." });
   try {
