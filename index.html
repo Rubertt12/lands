@@ -1,138 +1,179 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#080b12">
-  <meta name="description" content="Portfólio de Rúbertt Silva: suporte técnico, Field Service, gestão de ativos, inventário e projetos de tecnologia.">
-  <title>Rúbertt Silva | Suporte, Infraestrutura & Tecnologia</title>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rúbertt Silva | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="barra-sup">
-    <div class="brandline"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>RÚBERTT SILVA <span class="brand-divider">/</span> TECHNOLOGY & SUPPORT</span></div>
-    <div class="top-right"><span class="status-dot"></span><span>Portfólio profissional</span><span id="clock">00:00</span></div>
-  </div>
 
-  <div id="bg-canvas" aria-hidden="true"></div>
-
-  <header id="header">
-    <div id="avatar-target" class="avatar-target"></div>
-    <span class="header-name">Rúbertt Silva</span>
-    <nav class="top-nav" aria-label="Navegação principal">
-      <a href="#sobre">Sobre</a><a href="#experiencia">Experiência</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a>
-    </nav>
-  </header>
-
-  <img src="/img/1760728760003.jpg" alt="Foto de Rúbertt Silva" class="avatar-float" id="avatar">
-
-  <main>
-    <section class="hero" id="inicio">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="status-dot"></span> FIELD SERVICE · INFRAESTRUTURA · SEGURANÇA</span>
-        <h1 class="titulo-silver">Tecnologia que<br><span>resolve problemas.</span></h1>
-        <p class="hero-subtitle">Sou Rúbertt Silva, profissional de TI com experiência em suporte técnico, gestão de ativos e sustentação de ambientes corporativos.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projetos">Explorar projetos <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
-          <a class="btn btn-secondary" href="https://br.linkedin.com/in/rubertt-ramires-da-silva" target="_blank" rel="noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+    <div class="barra-sup">
+        <div style="display:flex; align-items:center; gap:12px">
+            <i class="fa-solid fa-shield-halved" style="color: var(--sotaque)"></i>
+            <span style="opacity: 0.9">RÚBERTT SILVA | SECURITY & SUPPORT</span>
         </div>
-        <div class="hero-meta"><span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Rio Grande do Sul, Brasil</span><span><i class="fa-solid fa-laptop-code" aria-hidden="true"></i> Suporte & soluções digitais</span></div>
-      </div>
-      <div class="hero-orbit" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit-core profile-core"><img src="/img/1760728760003.jpg" alt="Foto de Rúbertt Silva"></div><span class="orbit-tag tag-one">IT SUPPORT</span><span class="orbit-tag tag-two">AUTOMATION</span><span class="orbit-tag tag-three">SECURITY</span></div>
-      <a class="scroll-cue" href="#sobre"><span></span> Role para conhecer meu trabalho</a>
+        <div style="margin-left:auto; display:flex; align-items:center; gap:15px">
+        <i class="fa-solid fa-sun" id="theme-toggle" style="cursor:pointer; font-size: 14px; opacity: 0.8;"></i>
+        <span id="clock">00:00</span>
+    </div>
+    </div>
+
+    <div id="bg-canvas"></div>
+
+    <header id="header">
+        <div id="avatar-target" style="width:40px; height:40px;"></div>
+        <span style="margin-left:15px; font-weight: 500; font-size: 15px; letter-spacing: -0.3px;">Rúbertt Silva</span>
+    </header>
+
+    <img src="/img/1760728760003.jpg" alt="Rúbertt Silva" class="avatar-float" id="avatar">
+
+    <section class="hero">
+        <h1 class="titulo-silver">Suporte Técnico</h1>
+        <p style="color: #a1a1a6; font-size: 1.3rem; margin-top: 15px; font-weight: 400;">Field Service @ Voke | Cybersecurity Student</p>
     </section>
 
-    <section class="content-section" id="sobre">
-      <div class="section-heading"><span class="section-kicker">01 / PERFIL</span><h2>Experiência prática.<br><span>Curiosidade constante.</span></h2></div>
-      <div class="intro-grid">
-        <article class="card intro-card">
-          <div class="card-icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></div>
-          <h3>Minha trajetória</h3>
-          <p>Minha jornada em tecnologia começou explorando sistemas, computadores e emuladores. Hoje, trabalho com suporte corporativo e Field Service, conectando diagnóstico técnico, organização de ativos e melhoria contínua.</p>
-          <p>Também desenvolvo projetos próprios para transformar tarefas repetitivas em ferramentas mais simples, úteis e organizadas.</p>
-        </article>
-        <div class="stats-stack">
-          <article class="stat-card"><span class="stat-label">FOCO ATUAL</span><strong>Field Service</strong><span>Suporte presencial, hardware e operação</span></article>
-          <article class="stat-card"><span class="stat-label">INTERESSE TÉCNICO</span><strong>Segurança & automação</strong><span>Aprendizado contínuo e soluções práticas</span></article>
-          <article class="stat-card"><span class="stat-label">ABORDAGEM</span><strong>Resolver e documentar</strong><span>Organização, rastreabilidade e experiência do usuário</span></article>
+    <div class="grid">
+        <div class="card span-12">
+            <span style="color:var(--sotaque); font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing: 1px;">Background</span>
+            <h2 style="margin-top:10px;">Trajetória</h2>
+            <p>
+                Iniciei no mundo digital configurando emuladores e hoje foco em <span class="destaque">Suporte Técnico</span>. Com sólida experiência em sustentação N3 e suporte crítico, busco unir a eficiência do hardware com a inteligência do software.
+            </p>
         </div>
-      </div>
-    </section>
 
-    <section class="content-section" id="experiencia">
-      <div class="section-heading"><span class="section-kicker">02 / CARREIRA</span><h2>Onde construí<br><span>minha experiência.</span></h2></div>
-      <div class="timeline">
-        <article class="timeline-item">
-          <div class="timeline-marker"><i class="fa-solid fa-building" aria-hidden="true"></i></div>
-          <div class="timeline-content"><div class="timeline-top"><span class="date">Março 2024 — Atual</span><span class="work-type">FIELD SERVICE</span></div><h3>Voke · Cliente Midea Carrier</h3><p>Atuação em suporte técnico presencial, diagnóstico de hardware, rollout e manutenção de equipamentos no modelo HaaS. Apoio à gestão de inventário, movimentação de ativos, documentação e acompanhamento de chamados e SLAs.</p><div class="tag-list"><span>Suporte N2</span><span>HaaS</span><span>Inventário</span><span>ITSM / SLA</span></div></div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-marker"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
-          <div class="timeline-content"><div class="timeline-top"><span class="date">Outubro 2020 — Outubro 2023</span><span class="work-type">SUPORTE DE SISTEMAS</span></div><h3>Rede Ideia · Ideia Business</h3><p>Suporte a plataformas de benefícios e assinatura digital, análise de incidentes, testes funcionais e identificação de bugs. Atuação como ponte entre usuários, operação e equipe de desenvolvimento, além de administração de ferramentas corporativas.</p><div class="tag-list"><span>Suporte de aplicações</span><span>QA funcional</span><span>Google Workspace</span><span>Certificados digitais</span></div></div>
-        </article>
-        <article class="timeline-item">
-          <div class="timeline-marker"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
-          <div class="timeline-content"><div class="timeline-top"><span class="date">Experiência anterior</span><span class="work-type">SUPORTE TÉCNICO</span></div><h3>FutureTI · Quero Importar</h3><p>Experiência inicial em TI, desenvolvendo base prática de atendimento, resolução de problemas e suporte ao usuário.</p></div>
-        </article>
-      </div>
-    </section>
+        <div class="card span-8">
+            <h2>Experiência</h2>
+            <div class="exp-box">
+                <span class="date">2024 – Presente</span>
+                <h3>Voke (Midea Carrier)</h3>
+                <p>Responsável pelo <strong>Rollout</strong> de ativos e manutenção em modelo <strong>HaaS</strong> na Midea Carrier. Atuação em diagnóstico de hardware, gestão de inventário e suporte crítico presencial.</p>
+            </div>
+            <div class="exp-box" style="border:none; margin:0;">
+                <span class="date">2019 – 2023</span>
+                <h3>Ideia Business</h3>
+                <p>Como Assistente de TI III na Ideia Business, atuei no suporte avançado às plataformas de benefícios e assinatura digital (Ideia Signer). Fui responsável por realizar testes de vulnerabilidade (QA), identificar bugs e atuar como ponte técnica entre as necessidades dos clientes e a equipe de desenvolvimento.</p>
+            </div>
+        </div>
 
-    <section class="content-section" id="competencias">
-      <div class="section-heading"><span class="section-kicker">03 / COMPETÊNCIAS</span><h2>Ferramentas e áreas<br><span>com que trabalho.</span></h2></div>
-      <div class="skills-grid">
-        <article class="skill-card"><i class="fa-solid fa-headset" aria-hidden="true"></i><h3>Suporte & operações</h3><p>Diagnóstico de hardware, suporte ao usuário, chamados, escalonamento, documentação e SLA.</p></article>
-        <article class="skill-card"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i><h3>Gestão de ativos</h3><p>Inventário, movimentação, conferência de equipamentos e organização de informações operacionais.</p></article>
-        <article class="skill-card"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><h3>Identidade & segurança</h3><p>Contato com Active Directory, Intune, Entra ID, certificados digitais e fundamentos de segurança da informação.</p></article>
-        <article class="skill-card"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i><h3>Desenvolvimento web</h3><p>HTML, CSS e JavaScript para protótipos, dashboards e ferramentas internas; uso de Git e GitHub no fluxo de desenvolvimento.</p></article>
-      </div>
-    </section>
+        <div class="card span-4">
+            <h2>Formação</h2>
+            <div style="margin-bottom:20px">
+                <h3 style="font-size:1.1rem">Graduação</h3>
+                <p>Segurança da Informação<br><span style="color:var(--sotaque); font-size: 0.9rem;">FADERGS (Em curso)</span></p>
+            </div>
+            <div>
+                <h3 style="font-size:1.1rem">Técnico</h3>
+                <p>Informática<br><span style="color:#34c759; font-size: 0.9rem;">Alcides Maya (Concluído)</span></p>
+            </div>
+        </div>
+    </div>
 
-    <section class="content-section" id="projetos">
-      <div class="section-heading projects-heading"><div><span class="section-kicker">04 / LABORATÓRIO</span><h2>Projetos que saíram<br><span>da ideia para a prática.</span></h2></div><p>Aplicações próprias para experimentar, organizar processos e resolver problemas reais.</p></div>
-      <div class="projects-grid">
-        <article class="project-card project-featured"><div class="project-top"><span class="project-number">01</span><span class="project-type">GESTÃO · WEB APP</span></div><div class="project-art art-inventory"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i><span>ASSETS / INVENTORY</span></div><div class="project-info"><h3>Sistema de Inventário</h3><p>Ferramenta para organizar ativos, acompanhar registros e facilitar a consulta de informações de inventário.</p><div class="tag-list"><span>HTML</span><span>CSS</span><span>JavaScript</span></div><a href="https://sistema-de-inventario-pearl.vercel.app/" target="_blank" rel="noreferrer" class="project-link">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></article>
-        <article class="project-card"><div class="project-top"><span class="project-number">02</span><span class="project-type">PRODUTIVIDADE</span></div><div class="project-art art-ativae"><i class="fa-solid fa-list-check" aria-hidden="true"></i><span>WORKFLOW / CONTROL</span></div><div class="project-info"><h3>Ativae</h3><p>Projeto de organização e controle com foco em tornar fluxos de trabalho mais claros.</p><div class="tag-list"><span>Web app</span><span>UX</span></div><a href="https://ativae-inventario-integrado.vercel.app/" target="_blank" rel="noreferrer" class="project-link">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></article>
-        <article class="project-card"><div class="project-top"><span class="project-number">03</span><span class="project-type">ECOMMERCE</span></div><div class="project-art art-store"><i class="fa-solid fa-store" aria-hidden="true"></i><span>DIGITAL STORE</span></div><div class="project-info"><h3>Store</h3><p>Experimento de loja digital e interface de navegação de produtos.</p><div class="tag-list"><span>Frontend</span><span>Web</span></div><a href="https://storerubertt-master.vercel.app/" target="_blank" rel="noreferrer" class="project-link">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></article>
-        <article class="project-card"><div class="project-top"><span class="project-number">04</span><span class="project-type">GESTÃO FINANCEIRA</span></div><div class="project-art art-finance"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>FINANCE / INSIGHTS</span></div><div class="project-info"><h3>Finanças</h3><p>Projeto pessoal voltado à visualização e organização de informações financeiras.</p><div class="tag-list"><span>Dashboard</span><span>Web app</span></div><a href="https://financesrubertt.vercel.app/" target="_blank" rel="noreferrer" class="project-link">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></article>
-        <article class="project-card"><div class="project-top"><span class="project-number">05</span><span class="project-type">GAMES</span></div><div class="project-art art-whales"><i class="fa-solid fa-gamepad" aria-hidden="true"></i><span>PLAY / EXPLORE</span></div><div class="project-info"><h3>WhalesGames</h3><p>Projeto de entretenimento digital para explorar interfaces e experiências interativas.</p><div class="tag-list"><span>Web</span><span>Interface</span></div><a href="https://whalesgames.vercel.app/" target="_blank" rel="noreferrer" class="project-link">Ver projeto <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></article>
-        <article class="project-card project-github"><div class="github-mark"><i class="fa-brands fa-github" aria-hidden="true"></i></div><h3>Mais código no GitHub</h3><p>Explore outros repositórios, experimentos e projetos em desenvolvimento.</p><a href="https://github.com/Rubertt12" target="_blank" rel="noreferrer" class="project-link">Abrir GitHub <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></article>
-      </div>
-    </section>
+    <div class="modal" id="modal">
+        <div class="modal-win">
+            <div class="modal-bar">
+                <div class="dot close" onclick="closeModal()"></div>
+                <div class="dot min"></div>
+                <div class="dot max"></div>
+            </div>
+            <div id="modalContent" style="flex:1"></div>
+        </div>
+    </div>
 
-    <section class="content-section education-section" id="formacao">
-      <div class="section-heading"><span class="section-kicker">05 / FORMAÇÃO</span><h2>Base técnica.<br><span>Aprendizado contínuo.</span></h2></div>
-      <div class="education-grid"><article class="education-card"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i><div><span class="date">Em andamento</span><h3>Segurança da Informação</h3><p>FADERGS</p></div><span class="education-status">EM CURSO</span></article><article class="education-card"><i class="fa-solid fa-certificate" aria-hidden="true"></i><div><span class="date">Concluído</span><h3>Técnico em Informática</h3><p>Alcides Maya</p></div><span class="education-status complete">CONCLUÍDO</span></article><article class="education-card"><i class="fa-solid fa-shield" aria-hidden="true"></i><div><span class="date">Estudos complementares</span><h3>Fundamentos de Cibersegurança</h3><p>Cisco Networking Academy</p></div><span class="education-status">ESTUDOS</span></article></div>
-    </section>
+    <div id="launchpad" class="lp-overlay">
+        <div class="lp-window" id="lpWindow">
+            <div class="lp-header">
+                <div class="lp-header-left">
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>Aplicações</span>
+                </div>
+                <button class="lp-fullscreen-btn" onclick="toggleLPFullscreen(event)" title="Alternar Fullscreen">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+            
+            <div class="lp-search">
+                <i class="fa-brands fa-app-store-ios"></i>
+                <input type="text" placeholder="Procurar" id="lpSearchInput">
+            </div>
 
-    <section class="contact-section" id="contato"><span class="section-kicker">06 / CONTATO</span><h2>Vamos conversar<br><span>sobre tecnologia?</span></h2><p>Estou aberto a oportunidades em suporte técnico, infraestrutura, operações de TI e áreas relacionadas à segurança da informação.</p><div class="hero-actions"><a class="btn btn-primary" href="https://br.linkedin.com/in/rubertt-ramires-da-silva" target="_blank" rel="noreferrer"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> Conectar no LinkedIn</a><a class="btn btn-secondary" href="https://github.com/Rubertt12" target="_blank" rel="noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Ver GitHub</a></div></section>
-  </main>
+            <div class="lp-grid" id="lpGrid">
+                <div class="lp-item" onclick="openModal('ativae')">
+                    <img src="img/favicon.svg" alt="Ativae">
+                    <span>Ativae</span>
+                </div>
+            <div class="lp-item" onclick="openModal('inventario')">
+                    <img src="img/icon-png.png" alt="Inventário">
+                    <span>inventario</span>
+                </div>
 
-  <footer class="site-footer"><span>© <span id="year"></span> Rúbertt Silva</span><span>Feito com curiosidade, código e café.</span><a href="#inicio">Voltar ao topo ↑</a></footer>
+                <div class="lp-item" onclick="openModal('store')">
+                    <img src="img/favicon-control.png" alt="Store">
+                    <span>Store</span>
+                </div>
+                <div class="lp-item" onclick="openModal('finances')">
+                    <img src="img/gestao.ico" alt="Finanças">
+                    <span>Finanças</span>
+                </div>
+                <div class="lp-item" onclick="openModal('empty')">
+                    <img src="img/novo-usuario.png" alt="Empty">
+                    <span>What's Empty</span>
+                </div>
+                <div class="lp-item" onclick="openModal('whales')">
+                    <img src="img/faviconwhale.svg" alt="WhalesGames">
+                    <span>WhalesGames</span>
+                </div>
+               
+                <div class="lp-item add-btn" onclick="addNewApp()">
+                    <div class="add-icon-wrapper" style="display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 18px;">
+                        <i class="fa-solid fa-plus" style="font-size: 24px; color: #fff;"></i>
+                    </div>
+                    <span>Adicionar</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Visualização do projeto"><div class="modal-win"><div class="modal-bar"><button class="dot close" onclick="closeModal()" aria-label="Fechar janela"></button><div class="dot min"></div><div class="dot max"></div></div><div id="modalContent" style="flex:1"></div></div></div>
+    <div class="dock-container">
+        <nav class="dock">
+            <a href="javascript:void(0)" onclick="toggleLaunchpad(event)" class="dock-item lp-btn" data-label="Launchpad">
+                <img src="img/launchpad.webp" style="width: 85%; height: 85%;">
+            </a>
+            
+            <div class="dock-separator" style="width: 1px; height: 40px; background: rgba(255,255,255,0.1); align-self: center;"></div>
 
-  <div id="launchpad" class="lp-overlay"><div class="lp-window" id="lpWindow"><div class="lp-header"><div class="lp-header-left"><i class="fa-solid fa-rocket" aria-hidden="true"></i><span>Aplicações</span></div><button class="lp-fullscreen-btn" onclick="toggleLPFullscreen(event)" title="Alternar tela cheia" aria-label="Alternar tela cheia"><i class="fa-solid fa-expand" aria-hidden="true"></i></button></div><div class="lp-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input type="text" placeholder="Procurar aplicação" id="lpSearchInput" aria-label="Procurar aplicação"></div><div class="lp-grid" id="lpGrid">
-    <div class="lp-item" onclick="openModal('ativae')"><img src="img/favicon.svg" alt=""><span>Ativae</span></div>
-    <div class="lp-item" onclick="openModal('inventario')"><img src="img/icon-png.png" alt=""><span>Inventário</span></div>
-    <div class="lp-item" onclick="openModal('store')"><img src="img/favicon-control.png" alt=""><span>Store</span></div>
-    <div class="lp-item" onclick="openModal('finances')"><img src="img/gestao.ico" alt=""><span>Finanças</span></div>
-    <div class="lp-item" onclick="openModal('empty')"><img src="img/novo-usuario.png" alt=""><span>What's Empty</span></div>
-    <div class="lp-item" onclick="openModal('whales')"><img src="img/faviconwhale.svg" alt=""><span>WhalesGames</span></div>
-    <div class="lp-item add-btn" onclick="addNewApp()"><div class="add-icon-wrapper"><i class="fa-solid fa-plus" aria-hidden="true"></i></div><span>Adicionar</span></div>
-  </div></div></div>
+            <a href="javascript:void(0)" onclick="openModal('linkedin')" class="dock-item li" draggable="true" data-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="openModal('github')" class="dock-item gh" draggable="true" data-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            
+            <a href="javascript:void(0)" onclick="openModal('ativae')" class="dock-item at" draggable="true" data-label="Ativae">
+                <img src="img/favicon.svg" alt="Ativae">
+            </a>
+            
+            <a href="javascript:void(0)" onclick="openModal('store')" class="dock-item st" draggable="true" data-label="Store">
+                <img src="img/favicon-control.png" alt="Store">
+            </a>
 
-  <div class="dock-container"><nav class="dock" aria-label="Atalhos">
-    <a href="#projetos" class="dock-item lp-btn" data-label="Projetos" aria-label="Ir para projetos"><i class="fa-solid fa-grid-2" aria-hidden="true"></i></a>
-    <span class="dock-separator" aria-hidden="true"></span>
-    <a href="https://br.linkedin.com/in/rubertt-ramires-da-silva" target="_blank" rel="noreferrer" class="dock-item li" data-label="LinkedIn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-    <a href="https://github.com/Rubertt12" target="_blank" rel="noreferrer" class="dock-item gh" data-label="GitHub" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-    <a href="#experiencia" class="dock-item at" data-label="Experiência" aria-label="Experiência"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></a>
-    <a href="#competencias" class="dock-item st" data-label="Competências" aria-label="Competências"><i class="fa-solid fa-code" aria-hidden="true"></i></a>
-    <a href="#contato" class="dock-item fi" data-label="Contato" aria-label="Contato"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></a>
-  </nav></div>
-  <script src="script.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+            <a href="javascript:void(0)" onclick="openModal('empty')" class="dock-item em" draggable="true" data-label="What's Empty">
+                <img src="img/novo-usuario.png" alt="Empty">
+            </a>
+
+            <a href="javascript:void(0)" onclick="openModal('finances')" class="dock-item fi" draggable="true" data-label="Finanças">
+                <img src="img/gestao.ico" alt="Finanças">
+            </a>
+
+            <a href="javascript:void(0)" onclick="openModal('whales')" class="dock-item fi" draggable="true" data-label="WhalesGames">
+                <img src="img/faviconwhale.svg" alt="WhalesGames">
+            </a>
+        </nav>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
