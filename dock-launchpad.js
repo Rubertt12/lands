@@ -122,6 +122,24 @@
     menu.style.top = Math.max(8, top) + "px";
   }
 
+  function applyHiddenDockItems() {
+    let hidden = [];
+    try { hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]"); } catch {}
+    dock.querySelectorAll(".dock-item:not(.lp-btn)").forEach(item => {
+      const app = appData(item);
+      if (app) item.hidden = hidden.includes(appKey(app));
+    });
+  }
+
+  dock.addEventListener("contextmenu", event => {
+    const item = event.target.closest(".dock-item");
+    if (!item || item.classList.contains("lp-btn") || item.classList.contains("dock-pinned-app")) return;
+    const app = appData(item);
+    if (!app) return;
+    event.preventDefault();
+    showMenu(event.clientX, event.clientY, app, true, item);
+  });
+
   function makePinButton(item) {
     if (item.classList.contains("add-btn") || item.querySelector(".lp-pin-btn")) return;
     const app = appData(item);
@@ -177,6 +195,14 @@
 
   function pinApp(app) {
     if (!app || (!app.modalId && !safeUrl(app.url))) return;
+    const hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]");
+    const key = appKey(app);
+    if (hidden.includes(key)) {
+      localStorage.setItem("portfolio-dock-hidden-v1", JSON.stringify(hidden.filter(item => item !== key)));
+      applyHiddenDockItems();
+      showToast(app.name + " voltou para a Dock.");
+      return;
+    }
     const apps = readPinned();
     const key = appKey(app);
     if (apps.some(existing => appKey(existing) === key)) {
@@ -216,6 +242,7 @@
 
   prepareItems();
   renderPinned();
+  applyHiddenDockItems();
   new MutationObserver(prepareItems).observe(grid, { childList: true, subtree: true });
 
   grid.addEventListener("dragstart", event => {
