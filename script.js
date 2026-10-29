@@ -122,33 +122,33 @@ function closeModal() {
 }
 
 // 5. ADICIONAR NOVO APP
+// Não guardar senha de administrador no frontend: qualquer visitante pode ler o JavaScript.
 function addNewApp() {
-    const password = prompt("Senha:");
-    if (password === "Mordocker42@ad") {
-        const name = prompt("Nome do Aplicativo:");
-        const url = prompt("URL do Site (com https://):");
-        let icon = prompt("URL do Ícone (ou deixe vazio para aleatório):");
-
-        const defaultIcons = ["img/favicon.svg", "img/favicon-control.png", "img/novo-usuario.png", "img/gestao.ico"];
-        if (!icon || icon.trim() === "") {
-            icon = defaultIcons[Math.floor(Math.random() * defaultIcons.length)];
-        }
-
-        if (name && url) {
-            const grid = document.querySelector('.lp-grid');
-            if (!grid) return;
-
-            const newItem = document.createElement('div');
-            newItem.className = 'lp-item';
-            newItem.onclick = () => window.open(url, '_blank');
-            newItem.innerHTML = `<img src="${icon}" alt="${name}"><span>${name}</span>`;
-
-            const addBtn = document.querySelector('.add-btn');
-            grid.insertBefore(newItem, addBtn);
-        }
-    } else if (password !== null) {
-        alert("Senha incorreta.");
-    }
+    const name = prompt("Nome da aplicação:");
+    if (!name || !name.trim()) return;
+    const rawUrl = prompt("URL completa da aplicação (https://...):");
+    if (!rawUrl) return;
+    let url;
+    try { url = new URL(rawUrl); } catch { alert("Informe uma URL válida."); return; }
+    if (!["https:", "http:"].includes(url.protocol)) { alert("Use uma URL HTTP ou HTTPS."); return; }
+    const grid = document.querySelector(".lp-grid");
+    const addBtn = document.querySelector(".add-btn");
+    if (!grid || !addBtn) return;
+    const item = document.createElement("a");
+    item.className = "lp-item";
+    item.href = url.href;
+    item.target = "_blank";
+    item.rel = "noopener noreferrer";
+    const icon = document.createElement("div");
+    icon.className = "add-icon-wrapper";
+    const glyph = document.createElement("i");
+    glyph.className = "fa-solid fa-arrow-up-right-from-square";
+    glyph.setAttribute("aria-hidden", "true");
+    icon.appendChild(glyph);
+    const label = document.createElement("span");
+    label.textContent = name.trim();
+    item.append(icon, label);
+    grid.insertBefore(item, addBtn);
 }
 
 // 6. EVENTOS GERAIS E DRAG & DROP
@@ -230,12 +230,12 @@ document.addEventListener('DOMContentLoaded', () => {
 const themeToggle = document.getElementById('theme-toggle');
 
 // Verifica se já existe uma preferência salva
-if (localStorage.getItem('theme') === 'light') {
+if (themeToggle && localStorage.getItem('theme') === 'light') {
     document.body.classList.add('light-mode');
     themeToggle.classList.replace('fa-sun', 'fa-moon');
 }
 
-themeToggle.addEventListener('click', () => {
+themeToggle?.addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
     const isLight = document.body.classList.contains('light-mode');
     
