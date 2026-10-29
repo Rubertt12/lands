@@ -16,7 +16,10 @@ async function githubRequest(method, url, body) {
 function validContent(data) {
   if (!data || typeof data !== "object" || typeof data.headline !== "string" || typeof data.headlineAccent !== "string" || typeof data.subtitle !== "string") return false;
   if (data.headline.length > 100 || data.headlineAccent.length > 100 || data.subtitle.length > 500 || !Array.isArray(data.apps) || data.apps.length > 50) return false;
-  if (data.photo !== undefined && (typeof data.photo !== "string" || data.photo.length > 500 || (data.photo !== "" && !(/^(https?:\/\/|\/img\/[a-zA-Z0-9._-]+$)/i.test(data.photo)))) return false;
+  if (data.photo !== undefined) {
+    if (typeof data.photo !== "string" || data.photo.length > 500) return false;
+    if (data.photo !== "" && !/^(https?:\/\/|\/img\/[a-zA-Z0-9._-]+$)/i.test(data.photo)) return false;
+  }
   if(data.roleLine!==undefined&&(typeof data.roleLine!=="string"||data.roleLine.length>180))return false;
   if(data.backgroundText!==undefined&&(typeof data.backgroundText!=="string"||data.backgroundText.length>1200))return false;
   if(data.experiences!==undefined&&(!Array.isArray(data.experiences)||data.experiences.length>30||!data.experiences.every(item=>item&&typeof item.date==="string"&&item.date.length<=100&&typeof item.title==="string"&&item.title.trim()&&item.title.length<=240&&typeof item.description==="string"&&item.description.length<=1200)))return false;
