@@ -531,3 +531,8 @@ body.light-mode .avatar-float{box-shadow:0 24px 55px rgba(35,48,72,.2),0 0 0 1px
 /* Ocultação persistente dos aplicativos nativos removidos da Dock */
 .dock .dock-item.dock-item-hidden,
 .dock .dock-item[hidden] { display: none !important; }
+
+
+/* Ocultar aplicativos do Launchpad sem depender do estilo padrão de [hidden] */
+.lp-grid .lp-item.lp-item-hidden,
+.lp-grid .lp-item[hidden] { display: none !important; }
