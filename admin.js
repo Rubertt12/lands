@@ -156,7 +156,7 @@
   $("photoFile").addEventListener("change", () => {
     const file = $("photoFile").files && $("photoFile").files[0];
     if (!file) return;
-    if (!/^image\\/(jpeg|png|webp|gif)$/.test(file.type) || file.size > 3 * 1024 * 1024) {
+    if (!/^image\/(jpeg|png|webp|gif)$/.test(file.type) || file.size > 3 * 1024 * 1024) {
       $("photoFile").value = "";
       message("saveMessage", "Escolha uma imagem JPG, PNG, WEBP ou GIF de até 3 MB.", true);
       return;
