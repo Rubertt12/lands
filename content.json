@@ -1,0 +1,13 @@
+{
+  "headline": "Tecnologia que",
+  "headlineAccent": "resolve problemas.",
+  "subtitle": "Sou Rúbertt Silva, profissional de TI com experiência em suporte técnico, gestão de ativos e sustentação de ambientes corporativos.",
+  "apps": [
+    {"name":"Ativae","icon":"img/favicon.svg","modalId":"ativae"},
+    {"name":"Inventário","icon":"img/icon-png.png","modalId":"inventario"},
+    {"name":"Store","icon":"img/favicon-control.png","modalId":"store"},
+    {"name":"Finanças","icon":"img/gestao.ico","modalId":"finances"},
+    {"name":"What's Empty","icon":"img/novo-usuario.png","modalId":"empty"},
+    {"name":"WhalesGames","icon":"img/faviconwhale.svg","modalId":"whales"}
+  ]
+}
