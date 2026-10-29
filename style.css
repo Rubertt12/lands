@@ -465,3 +465,42 @@ body.light-mode .dock-item i { color: #ffffff !important; }
     transition: color .2s ease, border-color .2s ease;
 }
 .admin-access-link:hover { color: var(--sotaque); border-color: var(--sotaque); }
+
+
+/* Launchpad -> Dock: fixar, arrastar e menu contextual */
+.lp-item { position: relative; }
+.lp-item.lp-app-draggable { cursor: grab; }
+.lp-item.dragging { opacity: .45; }
+.lp-pin-btn {
+    position: absolute; top: 7px; right: 7px; z-index: 2;
+    width: 27px; height: 27px; border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50%; color: #fff; background: rgba(25,25,28,.82);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; transform: scale(.9);
+    transition: opacity .18s ease, transform .18s ease;
+}
+.lp-item:hover .lp-pin-btn, .lp-pin-btn:focus-visible { opacity: 1; transform: scale(1); }
+.dock.dock-drop-target { outline: 2px dashed var(--sotaque); outline-offset: 5px; }
+.dock-pinned-app { background: rgba(255,255,255,.12); }
+.dock-app-menu {
+    position: fixed; z-index: 20000; min-width: 165px; padding: 6px;
+    background: rgba(35,35,38,.96); color: #fff; border: 1px solid rgba(255,255,255,.15);
+    border-radius: 12px; box-shadow: 0 12px 35px rgba(0,0,0,.45); backdrop-filter: blur(20px);
+}
+.dock-app-menu button {
+    width: 100%; border: 0; border-radius: 7px; padding: 10px 12px;
+    color: inherit; background: transparent; text-align: left; font: inherit; cursor: pointer;
+}
+.dock-app-menu button:hover { background: rgba(255,255,255,.12); }
+.dock-toast {
+    position: fixed; z-index: 20001; left: 50%; bottom: 105px;
+    transform: translate(-50%, 8px); opacity: 0; pointer-events: none;
+    padding: 10px 15px; border-radius: 12px; color: #fff;
+    background: rgba(35,35,38,.94); border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 8px 25px rgba(0,0,0,.35); font-size: 13px;
+    transition: opacity .2s ease, transform .2s ease;
+}
+.dock-toast.visible { opacity: 1; transform: translate(-50%, 0); }
+@media (hover: none) {
+    .lp-pin-btn { opacity: 1; transform: none; }
+}
