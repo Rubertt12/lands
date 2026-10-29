@@ -41,6 +41,11 @@
       "name": "StoreRubertt",
       "icon": "https://storerubertt-master.vercel.app/assets/goldeaxe.gif",
       "url": "https://storerubertt-master.vercel.app/"
+    },
+    {
+      "name": "rrnmanager",
+      "icon": "https://rrnmanager.vercel.app/img/icon-png.png",
+      "url": "https://rrnmanager.vercel.app/index.html"
     }
   ]
 }
