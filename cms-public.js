@@ -24,6 +24,11 @@
           const item = document.createElement("button");
           item.type = "button";
           item.className = "lp-item";
+          item.style.background = "transparent";
+          item.style.border = "0";
+          item.style.color = "inherit";
+          item.style.font = "inherit";
+          item.style.cursor = "pointer";
           item.setAttribute("aria-label", "Abrir " + app.name.slice(0, 60));
           const icon = document.createElement("img");
           icon.src = textValue(app.icon, "img/favicon.svg");
