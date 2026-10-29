@@ -36,6 +36,11 @@
       "name": "Cosplaychess",
       "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
       "url": "https://cosplaychess-nine.vercel.app/"
+    },
+    {
+      "name": "StoreRubertt",
+      "icon": "https://storerubertt-master.vercel.app/assets/goldeaxe.gif",
+      "url": "https://storerubertt-master.vercel.app/"
     }
   ]
 }
