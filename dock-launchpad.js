@@ -215,6 +215,27 @@
       pinApp(app);
     });
     item.appendChild(pin);
+    const hide = document.createElement("button");
+    hide.type = "button";
+    hide.className = "lp-hide-btn";
+    hide.title = "Ocultar do Launchpad";
+    hide.setAttribute("aria-label", "Ocultar " + app.name + " do Launchpad");
+    hide.innerHTML = '<i class="fa-solid fa-eye-slash" aria-hidden="true"></i>';
+    hide.addEventListener("click", event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const key = appKey(app);
+      let hidden = [];
+      try {
+        const stored = JSON.parse(localStorage.getItem("portfolio-launchpad-hidden-v1") || "[]");
+        if (Array.isArray(stored)) hidden = stored;
+      } catch {}
+      if (!hidden.includes(key)) hidden.push(key);
+      try { localStorage.setItem("portfolio-launchpad-hidden-v1", JSON.stringify(hidden)); } catch {}
+      applyHiddenLaunchpadItems();
+      showToast(app.name + " foi ocultado do Launchpad.");
+    });
+    item.appendChild(hide);
   }
 
   function renderPinned() {
