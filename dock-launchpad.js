@@ -149,19 +149,20 @@
     let order = [];
     try { order = JSON.parse(localStorage.getItem("portfolio-dock-order-v1") || "[]"); } catch {}
     if (!Array.isArray(order) || !order.length) return;
-    const items = [...dock.querySelectorAll(".dock-item:not(.lp-btn)")];
+    const items = [...dock.querySelectorAll(".dock-item:not(.lp-btn):not(.dock-trash)")];
     items.sort((a,b) => {
       const aa=appData(a), bb=appData(b);
       const ai=aa?order.indexOf(appKey(aa)):-1, bi=bb?order.indexOf(appKey(bb)):-1;
       return (ai < 0 ? 9999 : ai) - (bi < 0 ? 9999 : bi);
     });
-    items.forEach(item => dock.appendChild(item));
+    const rightSeparator = dock.querySelector(".dock-trash-separator");
+    items.forEach(item => dock.insertBefore(item, rightSeparator || dock.querySelector(".dock-trash")));
   }
 
   function applyHiddenDockItems() {
     let hidden = [];
     try { hidden = JSON.parse(localStorage.getItem("portfolio-dock-hidden-v1") || "[]"); } catch {}
-    dock.querySelectorAll(".dock-item:not(.lp-btn)").forEach(item => {
+    dock.querySelectorAll(".dock-item:not(.lp-btn):not(.dock-trash)").forEach(item => {
       const app = appData(item);
       if (app) {
         const isHidden = hidden.includes(appKey(app));
