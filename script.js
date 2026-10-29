@@ -30,7 +30,7 @@ function animate() {
         avatar.style.height = `${size}px`;
         avatar.style.borderRadius = `${(isMobile ? 35 : 55) - (ease * ((isMobile ? 35 : 55) - 10))}px`;
         const curX = (window.innerWidth / 2) + ((rect.left + rect.width / 2) - (window.innerWidth / 2)) * ease;
-        const curY = (window.innerHeight * 0.45) + ((rect.top + rect.height / 2) - (window.innerHeight * 0.45)) * ease;
+        const curY = (window.innerHeight * (isMobile ? 0.32 : 0.35)) + ((rect.top + rect.height / 2) - (window.innerHeight * 0.45)) * ease;
         avatar.style.left = `${curX}px`;
         avatar.style.top = `${curY}px`;
         avatar.style.transform = `translate(-50%, -50%)`;
