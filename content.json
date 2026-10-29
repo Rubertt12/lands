@@ -32,6 +32,11 @@
       "name": "RRN MANAGER",
       "icon": "https://sistema-de-inventario-pearl.vercel.app/img/icon-png.png",
       "url": "https://sistema-de-inventario-pearl.vercel.app/index.html"
+    },
+    {
+      "name": "Cosplay Chess",
+      "icon": "https://cosplaychess-nine.vercel.app/img/logofergoverse.png",
+      "url": "https://cosplaychess-nine.vercel.app/"
     }
   ]
 }
