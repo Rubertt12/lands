@@ -1,5 +1,5 @@
 {
-  "photo": "/img/profile-1793293686711.jpg",
+  "photo": "",
   "headline": "Suporte técnico",
   "headlineAccent": "-",
   "subtitle": "Sou Rúbertt Silva, profissional de TI com experiência em suporte técnico, gestão de ativos e sustentação de ambientes corporativos.",
@@ -45,7 +45,7 @@
     {
       "name": "rrnmanager",
       "icon": "https://rrnmanager.vercel.app/img/icon-png.png",
-      "url": "https://rrnmanager.vercel.app/index.html"
+      "url": "https://rrnmanager.vercel.app/"
     }
   ]
 }
